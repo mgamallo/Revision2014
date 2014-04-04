@@ -94,7 +94,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 					Inicio.jBServicio.setText("X");
 					Inicio.jBServiciop.setText("X");
 				}
-				new FocalAdobe();
+				new FocalAdobe(100);
 			}
 		});
 
@@ -113,7 +113,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				//Icon icono = new ImageIcon(getClass().getResource("/iconos/maletin48x48.png"));
-				new FocalAdobe();
+				new FocalAdobe(100);
 				ventanaRenombrarServicios();
 			}
 
@@ -132,7 +132,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventanaRenombrarNombres();
-				new FocalAdobe();
+				new FocalAdobe(100);
 			}
 
 		});
@@ -657,7 +657,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		jListHabituales1.clearSelection();
 		jLNombresDoc.clearSelection();
 		
-		new FocalAdobe();
+		new FocalAdobe(100);
 	}
 
     
@@ -676,7 +676,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		jLNombresDoc.clearSelection();
 		jListHabituales2.clearSelection();
 		
-		new FocalAdobe();
+		new FocalAdobe(100);
 	}
 
 	protected void listaNombresDocMouseClicked(MouseEvent evt) {
@@ -691,7 +691,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		jListHabituales1.clearSelection();
 		jListHabituales2.clearSelection();
 		
-		new FocalAdobe();
+		new FocalAdobe(100);
 	}
 
     
@@ -720,7 +720,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			renombraServicios();
 		}
 		
-		new FocalAdobe();
+		new FocalAdobe(100);
 	}
 	
 

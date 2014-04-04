@@ -74,7 +74,7 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
         	public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
         		validarNHC(jTFnhc.getText());
-        		new FocalAdobe();
+        		new FocalAdobe(100);
         		Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc = false;
            	 	Inicio.jBNHC.setBackground(Color.green);
 				Inicio.jBNHCp.setBackground(Color.green);
@@ -88,7 +88,7 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
             public void actionPerformed (ActionEvent e)
             {
             	validarNHC(jTFnhc.getText());
-            	new FocalAdobe();
+            	new FocalAdobe(100);
             	Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc = false;
             	Inicio.jBNHC.setBackground(Color.green);
 				Inicio.jBNHCp.setBackground(Color.green);
@@ -102,7 +102,7 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
         jBCancelar.addActionListener (new ActionListener(){
             public void actionPerformed (ActionEvent e)
             {
-            	new FocalAdobe();
+            	new FocalAdobe(100);
             	dispose();
             }
           });
@@ -123,7 +123,7 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
             public void actionPerformed (ActionEvent e)
             {
             	validarNHC(jBNHCAnterior.getText());
-            	new FocalAdobe();
+            	new FocalAdobe(100);
             	dispose();
             }
           });
@@ -167,7 +167,7 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
       			switch (e.getKeyCode()){
       			case KeyEvent.VK_SPACE:  
       				validarNHC(jBNHCAnterior.getText());
-      				new FocalAdobe();
+      				new FocalAdobe(200);
       				dispose();
       				break;
       				

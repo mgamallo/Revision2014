@@ -1,7 +1,9 @@
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -22,6 +24,13 @@ public class Inicio extends JFrame {
 	static final String RUTAB = "h:/digitalización/00 documentacion/01 Escaneado";
 	static final String RUTAURG ="j:/DIGITALIZACIÓN/01 INFORMES URG (Colectiva)"; 
 	static final String RUTAURGB ="H:/DIGITALIZACIÓN/01 INFORMES URG (Colectiva)";	
+	
+	static final String RUTAPC = "c:/ianus/ianus.txt"; 
+	static String nombrePc;
+	static boolean acrobatAntiguo = false;
+	
+	static String rutaFocoAcrobat = "cal\\FocoAcrobat.exe";
+	static String rutaFocoNHC = "cal\\FocoNHC.exe";
 	
 	static boolean documentacionDeUrgencias = false;
 	
@@ -116,6 +125,12 @@ public class Inicio extends JFrame {
 				
 		numeroPantallas = gs.length;
 		
+		nombrePc = new IdentificarPc().getIdentificacion(RUTAPC);
+		
+		if(nombrePc.equals("mahc13p")){
+			acrobatAntiguo = true;
+			rutaFocoAcrobat = "cal\\FocoAcrobat2.exe";
+		}
 		
 		excel = new LeerExcel();
 		
@@ -219,3 +234,25 @@ class VentanaUrgODoc{
 	}
 	
 }
+
+class IdentificarPc {
+
+	
+	String getIdentificacion(String ruta){
+		File f = new File(ruta);
+		Scanner s;
+		String pc = "NoN";
+		try{
+			s = new Scanner(f);
+			if (s.hasNextLine()){
+				 pc = s.nextLine();
+				System.out.println(pc);
+			}
+			s.close();
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		return pc;
+	}
+}	

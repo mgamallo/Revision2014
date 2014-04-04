@@ -262,8 +262,8 @@ public class VentanaExplorador extends javax.swing.JFrame {
     		        	        Inicio.ventanaCompacta.setBounds(Inicio.coordenadas.coordenadas[2].x, Inicio.coordenadas.coordenadas[2].y, 750, 180);
     		        	        
     		        	        
-    		        	        File archivo2 = new File("cal\\FocoAcrobat.exe");
-    		        	        File archivo3 = new File("cal\\FocoNHC.exe");
+    		        	        File archivo2 = new File(Inicio.rutaFocoAcrobat);
+    		        	        File archivo3 = new File(Inicio.rutaFocoNHC);
     		        	        try {
     		        				 Process p = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo2);
     		        				 Process pNHC = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo3);
@@ -407,7 +407,7 @@ public class VentanaExplorador extends javax.swing.JFrame {
     		        	        Inicio.ventanaCompacta = new VentanaCompacta();
     		        	        Inicio.ventanaCompacta.setBounds(Inicio.coordenadas.coordenadas[2].x, Inicio.coordenadas.coordenadas[2].y, 750, 180);
     		        	        
-    		        	        File archivo2 = new File("cal\\FocoAcrobat.exe");
+    		        	        File archivo2 = new File(Inicio.rutaFocoAcrobat);
     		        	        try {
     		        				Process p = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo2);
     		        			} catch (IOException e1) {
@@ -1273,13 +1273,16 @@ public class VentanaExplorador extends javax.swing.JFrame {
     public void cerrarAutoHotKey(){
   		if(Inicio.ventanaCompacta.jBDeshabilitar.getText().equals("Teclas On")){
   			String cmd = "taskkill.exe /F /IM FocoAcrobat.exe /T";
+  			String cmd3 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
   			String cmdNHC = "taskkill.exe /F /IM FocoNHC.exe /T";
   			
-  			Process hijo, hijo2;
+  			Process hijo, hijo2, hijo3;
   			 try {
  				hijo = Runtime.getRuntime().exec(cmd);
- 				 				
  				hijo.waitFor();
+ 				
+ 				hijo3 = Runtime.getRuntime().exec(cmd3);
+ 				hijo3.waitFor();
  				
  				hijo2 = Runtime.getRuntime().exec(cmdNHC);
  				hijo2.waitFor();

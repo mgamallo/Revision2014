@@ -609,8 +609,8 @@ public class VentanaCompacta extends javax.swing.JFrame {
   				
   				if(Inicio.ventanaIntroducirNHC != null){
   	  				Inicio.ventanaIntroducirNHC.validarNHC(Inicio.ventanaIntroducirNHC.jBNHCAnterior.getText());
-  	  				//new FocalAdobe();
   	  				Inicio.ventanaIntroducirNHC.dispose();
+  	  				new FocalAdobe(100);
   	  				break;	
   				}
   			/*	
@@ -661,8 +661,9 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		if (texto.equals("Teclas On")) {
 			String cmd = "taskkill.exe /F /IM FocoAcrobat.exe /T";
 			String cmd2 = "taskkill.exe /F /IM FocoNHC.exe /T";
-
-			Process hijo, hijo2;
+			String cmd3 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
+			
+			Process hijo, hijo2, hijo3;
 			try {
 				hijo = Runtime.getRuntime().exec(cmd);
 
@@ -670,6 +671,10 @@ public class VentanaCompacta extends javax.swing.JFrame {
 				hijo2 = Runtime.getRuntime().exec(cmd2);
 
 				hijo2.waitFor();
+				
+				hijo3 = Runtime.getRuntime().exec(cmd3);
+
+				hijo3.waitFor();
 
 				Thread.sleep(300);
 
@@ -684,8 +689,8 @@ public class VentanaCompacta extends javax.swing.JFrame {
 
 		} else if (texto.equals("Teclas Off")) {
 
-			File archivo2 = new File("cal\\FocoAcrobat.exe");
-			File archivo3 = new File("cal\\FocoNHC.exe");
+			File archivo2 = new File(Inicio.rutaFocoAcrobat);
+			File archivo3 = new File(Inicio.rutaFocoNHC);
 			try {
 				Process p = Runtime.getRuntime().exec(
 						"rundll32 url.dll,FileProtocolHandler " + archivo2);
