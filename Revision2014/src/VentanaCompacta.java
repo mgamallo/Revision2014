@@ -1,5 +1,6 @@
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
@@ -757,9 +758,11 @@ public class VentanaCompacta extends javax.swing.JFrame {
 					.setSelectedIndex(Inicio.numeroPdf);
 
 			try {
-				Process p = Runtime.getRuntime().exec(
-						"rundll32 url.dll,FileProtocolHandler " + archivo);
+				// Process p = Runtime.getRuntime().exec(
+				//		"rundll32 url.dll,FileProtocolHandler " + archivo);
 
+				Desktop.getDesktop().open(archivo);
+				
 				Inicio.jBNHC
 						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nhc);
 				if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals("Separador")
@@ -863,7 +866,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 			}
 
 		} else {
-			int registrar = JOptionPane.showConfirmDialog(null, "Carpeta revisada. ¿Quieres registrar?");
+			int registrar = JOptionPane.showConfirmDialog(Inicio.ventanaPrincipal, "Carpeta revisada. ¿Quieres registrar?");
 			if(JOptionPane.OK_OPTION == registrar){
 				Inicio.ventanaPrincipal.registraCambiosFinales();
 			}

@@ -189,6 +189,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         jButton1.setText("HOSP");
+        jButton1.setBackground(new Color(80,200,120));
         jButton1.addActionListener(new ActionListener() {
 			
    			@Override
@@ -202,6 +203,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    		});
 
         jButton2.setText("CIA");
+        jButton2.setBackground(new Color(80,200,120));
         jButton2.addActionListener(new ActionListener() {
 			
    			@Override
@@ -227,6 +229,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    		});
 
         jButton4.setText("ANR");
+        jButton4.setBackground(Color.yellow);
         jButton4.addActionListener(new ActionListener() {
 			
    			@Override
@@ -240,6 +243,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    		});
 
         jButton5.setText("CAR");
+        jButton5.setBackground(Color.yellow);
         jButton5.addActionListener(new ActionListener() {
 			
    			@Override
@@ -717,8 +721,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			Inicio.jBNHC.setBackground(new java.awt.Color(153, 255, 153));
 			Inicio.jBNHCp.setBackground(new java.awt.Color(153, 255, 153));
 			
+
+			
 			renombraServicios();
 		}
+		else{
+			if(Inicio.jBServicio.getText().equals("CIA")){
+				if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas > 2){
+					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Quirófano";
+					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+				}
+			}
+			if(Inicio.jBServicio.getText().equals("HOSP")){
+				if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas > 2){
+					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Hospitalización";
+					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+				}
+			}
+		}
+	
+		
 		
 		new FocalAdobe(100);
 	}
