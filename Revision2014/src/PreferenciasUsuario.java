@@ -15,7 +15,7 @@ public class PreferenciasUsuario {
 	int numPantallas;
 	
 	PreferenciasUsuario(){
-		coordenadas = new Point[4];
+		coordenadas = new Point[6];
 		numPantallas = getNumPantallas();
 
 		setCoordenadas(Inicio.excel.getPreferencias(Inicio.usuario, numPantallas));
@@ -36,6 +36,8 @@ public class PreferenciasUsuario {
 		coordenadas[1] = coord[1];		// Ancho y alto ventana explorador
 		coordenadas[2] = coord[2];		// VentanaCompacta
 		coordenadas[3] = coord[3];		// VentanaPrincipal
+		coordenadas[4] = coord[4];		// VentanaIntegral
+		coordenadas[5] = coord[5];		// VentanaMicro
 	}
 	
 	
@@ -51,6 +53,15 @@ public class PreferenciasUsuario {
 		rectExplor = new Rectangle(Inicio.ventanaPrincipal.getBounds());
 		coordenadas[3].x = rectExplor.x;
 		coordenadas[3].y = rectExplor.y;
+		if(Inicio.menuVertical){
+			rectExplor = new Rectangle(Inicio.ventanaIntegral.getBounds());
+			coordenadas[4].x = rectExplor.x;
+			coordenadas[4].y = rectExplor.y;
+			//rectExplor = new Rectangle(Inicio.ventanaMicro.getBounds());
+			// coordenadas[5].x = rectExplor.x;
+			// coordenadas[5].y = rectExplor.y;
+		}
+
 		
 		/*
 		System.out.println(coordenadas[1]);

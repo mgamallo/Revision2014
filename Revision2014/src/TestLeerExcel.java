@@ -55,7 +55,7 @@ public class TestLeerExcel {
 		}
 		int errores = 0;
 		for(int i=0;i<listaDocumentos.length;i++){
-			if(!listaDocumentos[i].renombraFichero())
+			if(!listaDocumentos[i].renombraFichero(listaDocumentos[0]))
 				errores++;
 		}
 		System.out.println(errores + " errores");

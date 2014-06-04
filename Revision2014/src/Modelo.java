@@ -28,7 +28,7 @@ public class Modelo {
 			servicios.add(cadenaExcel);
 		}
 		else{
-			servicios.add("ENCONSTRUCCION");
+			servicios.add("X");
 		}
 	}
 }

@@ -91,7 +91,8 @@ public class LeerExcel {
 	        }
 	        
 	        listaServiciosLista = new DefaultListModel();
-	        for(int i=0;i<numColumnas-3;i++){
+	        for(int i=0;i<numColumnas-4;i++){
+	        	System.out.println(listaServicios[i].toString());
 	        	listaServiciosLista.addElement(listaServicios[i]);
 	        }
 	        
@@ -394,16 +395,20 @@ public class LeerExcel {
     
     Point[] getPreferencias(String nombreUser, int numPantallas){
    	 int numUsers = tablaCoordenadas.length;
-   	 Point[] parejaCoordenadas = new Point[4];
-   	 for(int i= 0;i<4;i++)
+   	 Point[] parejaCoordenadas = new Point[6];
+   	 for(int i= 0;i<6;i++)
    		 parejaCoordenadas[i]= new Point();
 
    	 int indice;
-   	 if(numPantallas == 1)
+   	 int indiceIntegral;
+   	 if(numPantallas == 1){
+   		 indiceIntegral = 19;
    		 indice = 1;
-   	 else 
+   	 }
+   	 else {
+   		 indiceIntegral= 23;
    		 indice = 10;
-   	    	 
+   	 } 	 
    	 
    	 for(int i=0;i<numUsers;i++){
    	//	 System.out.println(tablaCoordenadas[i][0]);
@@ -415,10 +420,23 @@ public class LeerExcel {
 	    				 parejaCoordenadas[j].x = Integer.parseInt(tablaCoordenadas[i][indice +1].toString());indice++;
 	    				 parejaCoordenadas[j].y = Integer.parseInt(tablaCoordenadas[i][indice +1].toString());indice++;   				 
 	    			 }
+	    			 
+	    			 //  Coordenadas de las ventanas integrales y de aviso
+	    			 if(indiceIntegral == 19){
+	    				 indice = 19;
+	    			 }else{
+	    				 indice = 23;
+	    			 }
+	    			 for(int j=0;j<2;j++){
+	    				 parejaCoordenadas[4 + j].x = Integer.parseInt(tablaCoordenadas[i][indice].toString());indice++;
+	    				 parejaCoordenadas[4 + j].y = Integer.parseInt(tablaCoordenadas[i][indice].toString());indice++;
+	    			 }
+	    			 
 	    			 break;
    			 }
    		 }
      }
+
    	 
    	System.out.println("El numero de coordenadas es: " + parejaCoordenadas.length);
    	for(int i=0;i<parejaCoordenadas.length;i++){

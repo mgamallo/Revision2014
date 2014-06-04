@@ -66,9 +66,9 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		jBGiroIz = new javax.swing.JButton();
 		jBEliminar = new javax.swing.JButton();
 		jBApartar = new javax.swing.JButton();
-		jBDeshabilitar = new javax.swing.JButton();
+		Inicio.jBDeshabilitar = new javax.swing.JButton();
 
-		setTitle("Revisión");
+		setTitle("RevisiÃ³n");
 		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		setPreferredSize(new java.awt.Dimension(750, 180));
 		setResizable(false);
@@ -133,7 +133,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		// Inicio.jBNombreDocp.setIcon(new
 		// javax.swing.ImageIcon(getClass().getResource("/iconos/NuclearAmarillo128x128.png")));
 		// // NOI18N
-		// Inicio.jBNombreDocp.setText("Enfermería");
+		// Inicio.jBNombreDocp.setText("EnfermerÃ­a");
 		Inicio.jBNombreDocp.setPreferredSize(new java.awt.Dimension(250, 75));
 
 		Inicio.jBNombreDocp.setMaximumSize(new java.awt.Dimension(370, 75));
@@ -162,7 +162,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 
 		jLNHC.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
 		jLNHC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLNHC.setText("Número de Historia");
+		jLNHC.setText("NÃºmero de Historia");
 
 		jLServicio.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
 		jLServicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -306,7 +306,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// jBExtraerActionPerformed(evt);
 				
-				habilitarTeclas(jBDeshabilitar.getText());
+				Inicio.utiles.habilitarTeclas(Inicio.jBDeshabilitar.getText());
 				
 				if(Inicio.ventanaExtraer != null){
 					Inicio.ventanaExtraer.dispose();
@@ -325,23 +325,23 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		jBGiroDcha.setLabel("");
 		jBGiroDcha.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jBGrabarActionPerformed(evt);
+				Inicio.utiles.jBGrabarPagina();
 				jPanel1.requestFocus();
 			}
 		});
 
 		jB180.setIcon(new javax.swing.ImageIcon("iconos/Giro.png")); // NOI18N
-		jB180.setToolTipText("Rota la página");
-		// jB180.setText("180 º");
+		jB180.setToolTipText("Rota la pÃ¡gina");
+		// jB180.setText("180 Âº");
 		jB180.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jB180ActionPerformed(evt);
+				new Acrobat().rotarPagina();
 				jPanel1.requestFocus();
 			}
 		});
 
 		jBGiroIz.setIcon(new javax.swing.ImageIcon("iconos/borrar.png")); // NOI18N
-		jBGiroIz.setToolTipText("Eliminar página");
+		jBGiroIz.setToolTipText("Eliminar pÃ¡gina");
 		jBGiroIz.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jBEliminarActionPerformed(evt);
@@ -392,13 +392,13 @@ public class VentanaCompacta extends javax.swing.JFrame {
 						javax.swing.GroupLayout.PREFERRED_SIZE, 0,
 						Short.MAX_VALUE));
 
-		jBDeshabilitar.setText("Teclas On");
-		jBDeshabilitar.setBackground(Color.pink);
-		jBDeshabilitar.setToolTipText("Habilita/Deshabilita las teclas");
-		jBDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
+		Inicio.jBDeshabilitar.setText("Teclas On");
+		Inicio.jBDeshabilitar.setBackground(Color.pink);
+		Inicio.jBDeshabilitar.setToolTipText("Habilita/Deshabilita las teclas");
+		Inicio.jBDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// jBEliminarActionPerformed(evt);
-				habilitarTeclas(jBDeshabilitar.getText());
+				Inicio.utiles.habilitarTeclas(Inicio.jBDeshabilitar.getText());
 				jPanel1.requestFocus();
 			}
 		});
@@ -429,7 +429,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 			}
 		});
 
-		// jBApartar.setIcon(new
+		// jBAaâ˜ºAâ˜ºpartar.setIcon(new
 		// javax.swing.ImageIcon("/iconos/Clip32x32.png")); // NOI18N
 		jBApartar.setText("Apartar");
 		jBApartar.setToolTipText("Aparta el documento");
@@ -451,7 +451,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 						javax.swing.GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addGap(0, 0, Short.MAX_VALUE)
-								.addComponent(jBDeshabilitar)
+								.addComponent(Inicio.jBDeshabilitar)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(jBEliminar)
@@ -487,7 +487,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 														layout.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.BASELINE)
 																.addComponent(
-																		jBDeshabilitar,
+																		Inicio.jBDeshabilitar,
 																		javax.swing.GroupLayout.PREFERRED_SIZE,
 																		29,
 																		javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -566,13 +566,15 @@ public class VentanaCompacta extends javax.swing.JFrame {
     			   }
 	   			 else{
 	   			 */
-	 	   			jBGrabarPagina(); 
+	 	   			Inicio.utiles.jBGrabarPagina(); 
+	 	   			
+	 	   			
 	   			 /* } */
 
 				break;
 			case KeyEvent.VK_R:
 				
-				System.out.println("Hola estoy pulsando la r en la ventana compacta");
+				// System.out.println("Hola estoy pulsando la r en la ventana compacta");
 				
 				new Acrobat().rotarPagina();
 				if ((Inicio.jBServicio.getText().equals("CAR") || Inicio.jBServicio
@@ -580,8 +582,8 @@ public class VentanaCompacta extends javax.swing.JFrame {
 						&& Inicio.jBNombreDoc.getText().equals("X")) {
 					// if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas
 					// <= 2){
-					Inicio.jBNombreDocp.setText("EKG");
-					Inicio.jBNombreDoc.setText("EKG");
+					Inicio.jBNombreDocp.setText(Inicio.EKG);
+					Inicio.jBNombreDoc.setText(Inicio.EKG);
 					Inicio.jBServiciop.setText("CAR");
 					Inicio.jBServicio.setText("CAR");
 					Inicio.jBNombreDocp.setBackground(Color.green);
@@ -658,60 +660,7 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		}
 	};
 
-	public void habilitarTeclas(String texto) {
-		if (texto.equals("Teclas On")) {
-			String cmd = "taskkill.exe /F /IM FocoAcrobat.exe /T";
-			String cmd2 = "taskkill.exe /F /IM FocoNHC.exe /T";
-			String cmd3 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
-			
-			Process hijo, hijo2, hijo3;
-			try {
-				hijo = Runtime.getRuntime().exec(cmd);
 
-				hijo.waitFor();
-				hijo2 = Runtime.getRuntime().exec(cmd2);
-
-				hijo2.waitFor();
-				
-				hijo3 = Runtime.getRuntime().exec(cmd3);
-
-				hijo3.waitFor();
-
-				Thread.sleep(300);
-
-			} catch (IOException e) {
-				// System.out.println("Incapaz de matar.");
-			} catch (InterruptedException e) {
-				// System.out.println("Incapaz de matar.");
-			}
-
-			jBDeshabilitar.setText("Teclas Off");
-			jBDeshabilitar.setBackground(Color.cyan);
-
-		} else if (texto.equals("Teclas Off")) {
-
-			File archivo2 = new File(Inicio.rutaFocoAcrobat);
-			File archivo3 = new File(Inicio.rutaFocoNHC);
-			try {
-				Process p = Runtime.getRuntime().exec(
-						"rundll32 url.dll,FileProtocolHandler " + archivo2);
-				Process pNHC = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo3);
-
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			jBDeshabilitar.setText("Teclas On");
-			jBDeshabilitar.setBackground(Color.pink);
-
-		}
-	}
-
-	private void jB180ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-		new Acrobat().rotarPagina();
-	}
 
 	void revisarPropiedadesDocumento() {
 		if (!Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals(Inicio.jBNHCp
@@ -738,147 +687,8 @@ public class VentanaCompacta extends javax.swing.JFrame {
 		Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloServicio = false;
 	}
 
-	private void jBGrabarPagina() {
-		new Acrobat().guardarPagina();
 
-		revisarPropiedadesDocumento();
 
-		System.out.println("Numero de pdf " + Inicio.numeroPdf
-				+ ". Tamaño Carpeta: " + Inicio.tamañoCarpetaPdf);
-		if (Inicio.numeroPdf < Inicio.tamañoCarpetaPdf - 1) {
-
-			// File archivo = new
-			// File(Inicio.rutaCompletaPdfs[++Inicio.numeroPdf]);
-			Inicio.ventanaExplorador.listaPdfs
-					.setSelectedIndex(Inicio.numeroPdf);
-
-			File archivo = new File(
-					Inicio.listaDocumentos[++Inicio.numeroPdf].rutaArchivo);
-			Inicio.ventanaExplorador.listaPdfs
-					.setSelectedIndex(Inicio.numeroPdf);
-
-			try {
-				// Process p = Runtime.getRuntime().exec(
-				//		"rundll32 url.dll,FileProtocolHandler " + archivo);
-
-				Desktop.getDesktop().open(archivo);
-				
-				Inicio.jBNHC
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nhc);
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals("Separador")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].nhc.contains("ERROR")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].nhc
-								.equals("NO")) {
-					Inicio.jBNHC.setBackground(Color.red);
-					Inicio.jBNHCp.setBackground(Color.red);
-				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc
-						.equals("Eliminar")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].nhc
-								.equals("Apartar")) {
-					Inicio.jBNHC.setBackground(Color.GRAY);
-					Inicio.jBNHCp.setBackground(Color.GRAY);
-				} else if(Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc){
-					Inicio.jBNHC.setBackground(Color.yellow);
-					Inicio.jBNHCp.setBackground(Color.yellow);
-				}
-				else{
-					Inicio.jBNHC.setBackground(Color.green);
-					Inicio.jBNHCp.setBackground(Color.green);
-				}
-				
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc
-						.equals("Separador")
-						&& !Inicio.listaDocumentos[Inicio.numeroPdf].servicio
-								.equals("X")) {
-					Inicio.jBNHC.setBackground(Color.green);
-					Inicio.jBNHCp.setBackground(Color.green);
-				}
-
-				Inicio.jBServicio
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].servicio);
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].servicio
-						.equals("X")) {
-					Inicio.jBServicio.setBackground(Color.red);
-					Inicio.jBServiciop.setBackground(Color.red);
-				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].servicio
-						.equals("Eliminar")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].servicio
-								.equals("Apartar")) {
-					Inicio.jBServicio.setBackground(Color.GRAY);
-					Inicio.jBServiciop.setBackground(Color.GRAY);
-				} else {
-					Inicio.jBServicio.setBackground(Color.green);
-					Inicio.jBServiciop.setBackground(Color.green);
-				}
-
-				Inicio.jBNombreDoc
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado
-						.equals("X")) {
-					Inicio.jBNombreDoc.setBackground(Color.red);
-					Inicio.jBNombreDocp.setBackground(Color.red);
-				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado
-						.equals("Eliminar")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado
-								.equals("Apartar")) {
-					Inicio.jBNombreDoc.setBackground(Color.GRAY);
-					Inicio.jBNombreDocp.setBackground(Color.GRAY);
-				} else {
-					Inicio.jBNombreDoc.setBackground(Color.green);
-					Inicio.jBNombreDocp.setBackground(Color.green);
-				}
-
-				Inicio.jBNHCp
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nhc);
-				Inicio.jBServiciop
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].servicio);
-				Inicio.jBNombreDocp
-						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloServicio == true) {
-					Inicio.jBServicio.setBackground(Color.yellow);
-					Inicio.jBServiciop.setBackground(Color.yellow);
-				}
-
-				if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals("NO")
-						|| Inicio.listaDocumentos[Inicio.numeroPdf].nhc
-								.contains("ERROR")) {
-					/*
-					try {
-						Robot robot = new Robot();
-						robot.delay(1300);
-					} catch (AWTException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					*/
-					Inicio.ventanaIntroducirNHC = new InterfazIntroducirNHC(null,false, Inicio.jBNHCp);
-					Inicio.ventanaIntroducirNHC.setVisible(true);
-
-					// dialog.requestFocus();
-					// jPanel1.requestFocus();
-				}
-
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-		} else {
-			int registrar = JOptionPane.showConfirmDialog(Inicio.ventanaPrincipal, "Carpeta revisada. ¿Quieres registrar?");
-			if(JOptionPane.OK_OPTION == registrar){
-				Inicio.ventanaPrincipal.registraCambiosFinales();
-			}
-		}
-		jPanel1.requestFocus();
-	}
-
-	private void jBGrabarActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-		jBGrabarPagina();
-		jPanel1.requestFocus();
-	}
 
 	private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
@@ -957,8 +767,6 @@ public class VentanaCompacta extends javax.swing.JFrame {
 	private javax.swing.JButton jBGiroDcha;
 	private javax.swing.JButton jBGiroIz;
 	private javax.swing.JButton jBExtraer;
-
-	public javax.swing.JButton jBDeshabilitar;
 
 	// private javax.swing.JButton jBNHC;
 	// private javax.swing.JButton jBNombreDoc;

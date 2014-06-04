@@ -112,6 +112,8 @@ public class Mapa {
 			String apartir = getApartir(textoPag1);
 			if(apartir.equals("NO")){
 				Etiqueta etiqueta = new Etiqueta(textoPag1);
+				
+				System.out.println("El tipo de etiqueta es... " + etiqueta.tipo);
 				if(etiqueta.tipo == 0){
 					return etiqueta.nhc;  // "NO encontró el tipo de etiqueta"
 				}

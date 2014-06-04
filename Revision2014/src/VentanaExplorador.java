@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,16 @@ import es.mgamallo.firma.VentanaDialogoSinFileChooser;
 
 public class VentanaExplorador extends javax.swing.JFrame {
 
-    /**
+    private JMenuItem jMenuItem11;
+
+	private JMenuItem jMenuItem12;
+
+	private JMenuItem jMenuItem13;
+
+	private JMenu jMenu9;
+
+	private JMenuItem jMenuItem14;
+	/**
      * Creates new form VentanaExplorador
      */
     public VentanaExplorador() {
@@ -58,11 +68,19 @@ public class VentanaExplorador extends javax.swing.JFrame {
         
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();					//	Carpeta		
+        jMenu9 = new javax.swing.JMenu("Revisar");
+        
         
         jMenuFirmar = new JMenu();
         jMenuItemFirmar = new JMenuItem("Firmar");
         
         jMenuItem1 = new javax.swing.JMenuItem();			//	Abrir Carpeta	
+        jMenuItem11 = new javax.swing.JMenuItem();			//	Ventana horizontal
+        jMenuItem14 = new javax.swing.JMenuItem();			//	Ventana vertical
+        jMenuItem12 = new javax.swing.JMenuItem();			//	Revisar A3
+        jMenuItem13 = new javax.swing.JMenuItem();			//	Escribir sólo NHC
+        
+        
         jMenuItem2 = new javax.swing.JMenuItem();			//	Consultar Carpeta
         jSeparadorVigo = new javax.swing.JSeparator();
         jMenuItemVigo = new javax.swing.JMenuItem();		//	Abrir carpeta Vigo
@@ -129,168 +147,59 @@ public class VentanaExplorador extends javax.swing.JFrame {
         jMenu1.setText("Carpeta");
         jMenuItem1.setText("Abrir Carpeta");
         jMenuItem1.setToolTipText("Añade el nombre del usuario a la carpeta seleccionada");
-        jMenuItem1.addActionListener(
+        
+        jMenu1.add(jMenu9);
+        
+        jMenu9.add(jMenuItem11);
+        jMenu9.add(jMenuItem14);
+        jMenu9.add(jMenuItem12);
+        jMenu9.add(jMenuItem13);
+        
+        jMenuItem11.setText("Ventana Horizontal");
+        jMenuItem14.setText("Ventana Vertical");
+        jMenuItem12.setText("A3");
+        jMenuItem13.setText("Sólo NHC");
+        
+        //	Ventana horizontal
+        jMenuItem11.addActionListener(
         		new ActionListener(){
         			public void actionPerformed(ActionEvent evento){
-        				
-        				VentanaExplorador.triggerVigo = false;
-        				
-        				VentanaInicioProgreso vp = new VentanaInicioProgreso();
-        				//vp.setVisible(false);
-        				
-        				CargaListaPdfs pdfs = new CargaListaPdfs(true);
-        				
-        				//vp.setVisible(true);
-        				
-        				
-        				if(pdfs.cargado == true){
-        					int tamaño = pdfs.nombrePdfs.length;
-        					tamañoLista = tamaño;
-        					        					
-        					Inicio.rutaCompletaPdfs = new String[tamaño];
-        					rutaCompletaPdfs = new String[tamaño];
-        					objetoPuente = new Object[tamañoLista];	//	Para pasar los datos a un jOptionPane (ya subidos)
-    					
-        					int aux = pdfs.ficheros.length;
-        					Inicio.listaDocumentos = new Documento[aux];
-        					int tamModelos = Inicio.modelos.size();
-
-        					/*
-        					 Inicio.modelo = new DefaultListModel();
-        					Inicio.modelo.addElement("Cargando...");
-        					listaPdfs.setModel(Inicio.modelo);
-        					*/
-        					
-        					for(int i=0;i<aux;i++){
-        						Inicio.listaDocumentos[i] = new Documento(pdfs.ficheros[i].getAbsolutePath());
-        						System.out.println(Inicio.listaDocumentos[i].rutaArchivo);
-        						for(int j=0;j<tamModelos;j++){
-        							if(Inicio.listaDocumentos[i].detector(Inicio.modelos.get(j))){
-        								break;
-        							}
-        						}
-        					}
-        					
-        					System.out.println("Segunda tanda de reconocimiento...");
-        					
-        					for(int i=0;i<aux;i++){
-        						for(int j=0;j<tamModelos;j++){
-        							if(Inicio.listaDocumentos[i].reDetectorNHC(Inicio.modelos.get(j))){
-        								break;
-        							}
-        						}
-        					}
-        					
-        					// Tercera tanda de reconocimiento solo para urgencias
-        					for(int i=0;i<aux;i++){
-        							Inicio.listaDocumentos[i].reDetectorNHCUrgencias();
-        					}
-        					
-        					//	Reconocimiento de ekg´s y ecos
-        					
-        					for(int i=0;i<aux;i++){
-        						Inicio.listaDocumentos[i].detectaEcos();
-        						Inicio.listaDocumentos[i].detectaEKGs();
-        					}
-        					
-        					Inicio.separadores = new ArrayList<Integer>();
-        					Inicio.separadores = new AveriguaServicio().getNumOrdenSeparadores();
-        					System.out.println("El primer separador vale: " + Inicio.separadores);
-        		       					
-        					
-        					int errores = 0;
-        					for(int i=0;i<Inicio.listaDocumentos.length;i++){
-        						if(!Inicio.listaDocumentos[i].renombraFichero())
-        							errores++;
-        					}
-        					
-        					System.out.println(errores + " errores");
-        					        					
-        					Inicio.modelo = new DefaultListModel();
-
-        					//	Almacena las carpetas por las que navega el usuario
-        					if(tamaño>0){
-        						String auxS = pdfs.rutaPdfs[0];
-        						int auxInt = auxS.lastIndexOf("\\");
-        						auxS = auxS.substring(0,auxInt);
-        						auxInt = auxS.lastIndexOf("\\");
-        						auxS = auxS.substring(0, auxInt);
-        						//System.out.println(aux);
-        						Inicio.carpetasAbiertas.add(auxS);
-        						
-        					}
-        					        					
-        					for(int i=0;i<tamaño;i++){
-        						Inicio.modelo.addElement(pdfs.nombrePdfs[i]);
-        						objetoPuente[i] = pdfs.nombrePdfs[i];
-        						rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
-        						Inicio.rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
-        					}
-        					
-        					Inicio.tamañoCarpetaPdf = tamaño;
-        					
-        					//	Determina el directorio firmados
-        					        					
-        					listaPdfs.setModel(Inicio.modelo);
-  //      					listaPdfs.setFont(new Font("Arial",Font.BOLD,10));
-        			    	setTitle(pdfs.getRutaCarpeta());
-        					Inicio.ficherosCargados= true;
-        				}
-        		        if(Inicio.ficherosCargados){
-        		        	vp.dispose();
-        		        	if(Inicio.ventanaRevisionAbierta == false){
-	        		        /*
-	        		        	 java.awt.EventQueue.invokeLater(new Runnable() {
-	        		        		        		        		public void run() {
-	        		        	        jMenu3.setEnabled(true);
-	        		        	        jMenu2.setEnabled(true);
-	        		        	        jMenuItem51.setEnabled(true);
-
-	        		        		//	Inicio.ventanaD = new InterFazTabla();
-	        		        		//	Inicio.ventanaD.setVisible(true);  
-	        		        	        
-	        		        	        Inicio.ventanaPrincipal = new VentanaPrincipal();
-	        		        	        Inicio.ventanaCompacta = new VentanaCompacta();
-	        		        			
-	        		        		}
-	        		        	});
-        					*/
-        
-	        		        	Inicio.ventanaPrincipal = new VentanaPrincipal();
-	        		        	Inicio.ventanaPrincipal.setBounds(Inicio.coordenadas.coordenadas[3].x, Inicio.coordenadas.coordenadas[3].y, 750, 650);
-    		        	        Inicio.ventanaCompacta = new VentanaCompacta();
-    		        	        Inicio.ventanaCompacta.setBounds(Inicio.coordenadas.coordenadas[2].x, Inicio.coordenadas.coordenadas[2].y, 750, 180);
-    		        	        
-    		        	        
-    		        	        File archivo2 = new File(Inicio.rutaFocoAcrobat);
-    		        	        File archivo3 = new File(Inicio.rutaFocoNHC);
-    		        	        try {
-    		        				 Process p = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo2);
-    		        				 Process pNHC = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo3);
-    		        	        	    		        	        	
-    		        			} catch (IOException e1) {
-    		        				// TODO Auto-generated catch block
-    		        				e1.printStackTrace();
-    		        			}
-    		        	        
-	        		        	Inicio.ventanaRevisionAbierta = true;
-	
-        		        	}
-        		        	
-        		        	if(Inicio.documentacionDeUrgencias){
-        		        		renombraURG();
-        		        	}
-        		        	else{
-        		        		if(Inicio.separadores.get(0) == -1){
-	        		        		JOptionPane.showMessageDialog(null, "No se ha detectado un separador. Puedes fijar el" +
-	        		        				" servicio de los documentos, en el botón fijar servicios");
-	        		        	}
-        		        	}
-        		        	
-        		        	vp.dispose();
-        		        }
+        				//	Menú horizontal
+        				Inicio.menuVertical = false;
+        				abrirCarpetaConVisualizacion(evento,0);
         			}
-	    				    			
+	        });
+        //	Ventana vertical
+        jMenuItem14.setEnabled(true);
+        jMenuItem14.addActionListener(
+        		new ActionListener(){
+        			public void actionPerformed(ActionEvent evento){
+        				//	Menú vertical
+        				Inicio.menuVertical = true;
+        				abrirCarpetaConVisualizacion(evento,1);
+        			}
+	        });
+        
+        
+        jMenuItem12.setEnabled(false);
+        jMenuItem12.addActionListener(
+        		new ActionListener(){
+        			public void actionPerformed(ActionEvent evento){
+        				//	Menú A3
+        				Inicio.menuVertical = true;
+        				abrirCarpetaConVisualizacion(evento,2);
+        			}
+	        });
+        
+        
+        jMenuItem13.setEnabled(false);
+        jMenuItem13.addActionListener(
+        		new ActionListener(){
+        			public void actionPerformed(ActionEvent evento){
+        				//	Menú sólo NHC
+        				Inicio.menuVertical = true;
+        				abrirCarpetaConVisualizacion(evento,3);
+        			}
 	        });
         
         
@@ -299,139 +208,13 @@ public class VentanaExplorador extends javax.swing.JFrame {
         jMenuItem2.setToolTipText("No añade el nombre del usuario a la carpeta seleccionada");
         jMenuItem2.addActionListener(
 	       		new ActionListener(){
-	    			public void actionPerformed(ActionEvent evento){
-	    				
-	    				VentanaExplorador.triggerVigo = false;
-	    				
-	    				VentanaInicioProgreso vp = new VentanaInicioProgreso();
-	    				//vp.setVisible(false);
-	    				
-	    				CargaListaPdfs pdfs = new CargaListaPdfs(false);
-	    					    				    				
-	    				//vp.setVisible(true);
-	    				
-        				if(pdfs.cargado == true){
-        					int tamaño = pdfs.nombrePdfs.length;
-        					tamañoLista = tamaño;
-        					        					
-        					Inicio.rutaCompletaPdfs = new String[tamaño];
-        					rutaCompletaPdfs = new String[tamaño];
-        					objetoPuente = new Object[tamañoLista];	//	Para pasar los datos a un jOptionPane (ya subidos)
-    					
-        					int aux = pdfs.ficheros.length;
-        					Inicio.listaDocumentos = new Documento[aux];
-        					int tamModelos = Inicio.modelos.size();
 
-        					/*
-        					 Inicio.modelo = new DefaultListModel();
-        					Inicio.modelo.addElement("Cargando...");
-        					listaPdfs.setModel(Inicio.modelo);
-        					*/
-        					
-        					for(int i=0;i<aux;i++){
-        						Inicio.listaDocumentos[i] = new Documento(pdfs.ficheros[i].getAbsolutePath());
-        						System.out.println(Inicio.listaDocumentos[i].rutaArchivo);
-        						for(int j=0;j<tamModelos;j++){
-        							if(Inicio.listaDocumentos[i].detector(Inicio.modelos.get(j))){
-        								break;
-        							}
-        						}
-        					}
-        					
-        					Inicio.separadores = new ArrayList<Integer>();
-        					Inicio.separadores = new AveriguaServicio().getNumOrdenSeparadores();
-        					System.out.println("El primer separador vale: " + Inicio.separadores);
-        		       					
-        					
-        					int errores = 0;
-        					for(int i=0;i<Inicio.listaDocumentos.length;i++){
-        						if(!Inicio.listaDocumentos[i].renombraFichero())
-        							errores++;
-        					}
-        					
-        					System.out.println(errores + " errores");
-        					        					
-        					Inicio.modelo = new DefaultListModel();
-
-        					//	Almacena las carpetas por las que navega el usuario
-        					if(tamaño>0){
-        						String auxS = pdfs.rutaPdfs[0];
-        						int auxInt = auxS.lastIndexOf("\\");
-        						auxS = auxS.substring(0,auxInt);
-        						auxInt = auxS.lastIndexOf("\\");
-        						auxS = auxS.substring(0, auxInt);
-        					//	System.out.println(aux);
-        						Inicio.carpetasAbiertas.add(auxS);
-        					}
-        					        					
-        					for(int i=0;i<tamaño;i++){
-        						Inicio.modelo.addElement(pdfs.nombrePdfs[i]);
-        						objetoPuente[i] = pdfs.nombrePdfs[i];
-        						rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
-        						Inicio.rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
-        					}
-        					
-        					Inicio.tamañoCarpetaPdf = tamaño;
-        					
-        					//	Determina el directorio firmados
-        					        					
-        					listaPdfs.setModel(Inicio.modelo);
-  //      					listaPdfs.setFont(new Font("Arial",Font.BOLD,10));
-        			    	setTitle(pdfs.getRutaCarpeta());
-        					Inicio.ficherosCargados= true;
-        				}
-        		        if(Inicio.ficherosCargados){
-        		        	
-        		        	vp.dispose();
-        		        	
-        		        	if(Inicio.ventanaRevisionAbierta == false){
-	        		        /*
-	        		        	 java.awt.EventQueue.invokeLater(new Runnable() {
-	        		        		        		        		public void run() {
-	        		        	        jMenu3.setEnabled(true);
-	        		        	        jMenu2.setEnabled(true);
-	        		        	        jMenuItem51.setEnabled(true);
-
-	        		        		//	Inicio.ventanaD = new InterFazTabla();
-	        		        		//	Inicio.ventanaD.setVisible(true);  
-	        		        	        
-	        		        	        Inicio.ventanaPrincipal = new VentanaPrincipal();
-	        		        	        Inicio.ventanaCompacta = new VentanaCompacta();
-	        		        			
-	        		        		}
-	        		        	});
-        					*/
-        
-	        		        	Inicio.ventanaPrincipal = new VentanaPrincipal();
-	        		        	Inicio.ventanaPrincipal.setBounds(Inicio.coordenadas.coordenadas[3].x, Inicio.coordenadas.coordenadas[3].y, 750, 650);
-    		        	        Inicio.ventanaCompacta = new VentanaCompacta();
-    		        	        Inicio.ventanaCompacta.setBounds(Inicio.coordenadas.coordenadas[2].x, Inicio.coordenadas.coordenadas[2].y, 750, 180);
-    		        	        
-    		        	        File archivo2 = new File(Inicio.rutaFocoAcrobat);
-    		        	        try {
-    		        				Process p = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo2);
-    		        			} catch (IOException e1) {
-    		        				// TODO Auto-generated catch block
-    		        				e1.printStackTrace();
-    		        			}
-    		        	        
-	        		        	Inicio.ventanaRevisionAbierta = true;
-	        		        	
-	        		        	if(Inicio.documentacionDeUrgencias){
-	        		        		renombraURG();
-	        		        	}
-	        		        	else{
-	        		        		if(Inicio.separadores.get(0) == -1){
-		        		        		JOptionPane.showMessageDialog(null, "No se ha detectado un separador. Puedes fijar el" +
-		        		        				" servicio de los documentos, en el botón fijar servicios");
-		        		        	}
-	        		        	}
-	        		        	
-	        		        	
-        		        	}
-        		        	vp.dispose();
-        		        }
-        			}
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+	       		
 	    				    			
 	        });
         
@@ -1004,8 +787,8 @@ public class VentanaExplorador extends javax.swing.JFrame {
                
         jScrollPane1.setViewportView(listaPdfs);
                         
-        jMenu1.add(jMenuItem1);			//	Abrir carpeta
-        jMenu1.add(jMenuItem2);			//	Consultar carpeta
+        // jMenu1.add(jMenuItem1);			//	Abrir carpeta
+        // jMenu1.add(jMenuItem2);			//	Consultar carpeta
         // jMenu1.add(jSeparadorVigo);
         //jMenu1.add(jMenuItemVigo);		//	Abrir carpeta Vigo
         // jMenu1.add(jSeparadorU);
@@ -1079,6 +862,9 @@ public class VentanaExplorador extends javax.swing.JFrame {
         		Inicio.numeroPdf = numArchivo;
         		int tamañoLista = listaPdfs.getModel().getSize();
 
+        		if(Inicio.menuVertical){
+    				Inicio.ventanaIntegral.listaPdfs.setSelectedIndex(Inicio.numeroPdf);
+    			}
         		
         		if(Inicio.ventanaIntroducirNHC != null){
         			Inicio.ventanaIntroducirNHC.dispose();
@@ -1170,6 +956,12 @@ public class VentanaExplorador extends javax.swing.JFrame {
     				   Inicio.jBNHC.setBackground(Color.yellow);
     				   Inicio.jBNHCp.setBackground(Color.yellow);
     			   }
+    			   
+    			   //   Actualiza al servicio del documento
+    			   
+    			   Inicio.jLServicios.setSelectedValue(Inicio.jBServicio.getText(), true);
+    			   Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jLServicios
+    						.getSelectedValue().toString()));
     			   
     			   if(Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals("NO") || Inicio.listaDocumentos[Inicio.numeroPdf].nhc.contains("ERROR")){
    				   
@@ -1271,7 +1063,7 @@ public class VentanaExplorador extends javax.swing.JFrame {
  
     
     public void cerrarAutoHotKey(){
-  		if(Inicio.ventanaCompacta.jBDeshabilitar.getText().equals("Teclas On")){
+  		if(Inicio.jBDeshabilitar.getText().equals("Teclas On")){
   			String cmd = "taskkill.exe /F /IM FocoAcrobat.exe /T";
   			String cmd3 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
   			String cmdNHC = "taskkill.exe /F /IM FocoNHC.exe /T";
@@ -1296,8 +1088,8 @@ public class VentanaExplorador extends javax.swing.JFrame {
 	 		 }
   			
   			 
-  			Inicio.ventanaCompacta.jBDeshabilitar.setText("Teclas Off");
-  			Inicio.ventanaCompacta.jBDeshabilitar.setBackground(Color.cyan);
+  			Inicio.jBDeshabilitar.setText("Teclas Off");
+  			Inicio.jBDeshabilitar.setBackground(Color.cyan);
   			
   		}
 
@@ -1342,6 +1134,264 @@ public class VentanaExplorador extends javax.swing.JFrame {
 	}
     
     
+    private void abrirCarpetaConVisualizacion(ActionEvent evento, int visualizacion){
+		
+    	/*
+    	 * 	visualización:	0	Menú grande
+    	 * 					1	Menú vertical
+    	 * 					2	Menú A3
+    	 * 					3	Menú sólo NHC
+    	 */
+    	
+    	
+    	
+    	VentanaExplorador.triggerVigo = false;
+		
+		VentanaInicioProgreso vp = new VentanaInicioProgreso();
+		//vp.setVisible(false);
+		
+		CargaListaPdfs pdfs = new CargaListaPdfs(true);
+		
+		//vp.setVisible(true);
+		
+		
+		if(pdfs.cargado == true){
+			int tamaño = pdfs.nombrePdfs.length;
+			tamañoLista = tamaño;
+			        					
+			Inicio.rutaCompletaPdfs = new String[tamaño];
+			rutaCompletaPdfs = new String[tamaño];
+			objetoPuente = new Object[tamañoLista];	//	Para pasar los datos a un jOptionPane (ya subidos)
+		
+			int aux = pdfs.ficheros.length;
+			Inicio.listaDocumentos = new Documento[aux];
+			int tamModelos = Inicio.modelos.size();
+
+			/*
+			 Inicio.modelo = new DefaultListModel();
+			Inicio.modelo.addElement("Cargando...");
+			listaPdfs.setModel(Inicio.modelo);
+			*/
+			
+			for(int i=0;i<aux;i++){
+				Inicio.listaDocumentos[i] = new Documento(pdfs.ficheros[i].getAbsolutePath());
+				System.out.println(Inicio.listaDocumentos[i].rutaArchivo);
+				for(int j=0;j<tamModelos;j++){
+					if(Inicio.listaDocumentos[i].detector(Inicio.modelos.get(j))){
+						break;
+					}
+				}
+			}
+			
+			System.out.println("Segunda tanda de reconocimiento...");
+			
+			for(int i=0;i<aux;i++){
+				for(int j=0;j<tamModelos;j++){
+					if(Inicio.listaDocumentos[i].reDetectorNHC(Inicio.modelos.get(j))){
+						break;
+					}
+				}
+			}
+			
+			// Tercera tanda de reconocimiento solo para urgencias
+			for(int i=0;i<aux;i++){
+					Inicio.listaDocumentos[i].reDetectorNHCUrgencias();
+			}
+			
+			// Reconocimientos varios
+			for(int i=0;i<aux;i++){
+				 Inicio.listaDocumentos[i].nhc = NHC.nhcTriaje143(Inicio.listaDocumentos[i]);
+			}
+			
+			//	Reconocimiento de ekg´s y ecos
+			
+			for(int i=0;i<aux;i++){
+				Inicio.listaDocumentos[i].detectaEcos();
+				Inicio.listaDocumentos[i].detectaEKGs();
+			}
+			
+			Inicio.separadores = new ArrayList<Integer>();
+			Inicio.separadores = new Separadores().getNumOrdenSeparadores();
+			System.out.println("El primer separador vale: " + Inicio.separadores);
+       		
+			
+			//	Adivina nombre separador
+			int numSeparador = 1;
+			for(int i=Inicio.separadores.get(0);i<Inicio.listaDocumentos.length;i++){
+				String servicioPosible = AdivinaServicio.getServicio(i + 1,Inicio.separadores.get(numSeparador));
+				if(i == -1){
+					i = 0;
+				}
+				for(int j=i;j<Inicio.separadores.get(numSeparador);j++){
+					
+					//Comprobamos si el servicio es anestesia para hacer el cambio anrc - carc
+					if(servicioPosible.equals("ANR")){
+						if(Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.EKG)){
+							Inicio.listaDocumentos[j].servicio = "CAR";
+						}
+						else{
+							Inicio.listaDocumentos[j].servicio = servicioPosible;
+						}
+					}
+					
+					else if(servicioPosible.equals("ORL")){
+						if(Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.EKG)){
+							Inicio.listaDocumentos[j].nombreNormalizado = "Videonistagmografía";
+						}
+						Inicio.listaDocumentos[j].servicio = servicioPosible;
+					}
+
+					else if(servicioPosible.equals("CIA")){
+						if(Inicio.listaDocumentos[j].fisica.numPaginas > 2 
+								&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("Hospitalización")){
+							
+							Inicio.listaDocumentos[j].nombreNormalizado = "Quirófano";
+						}
+						Inicio.listaDocumentos[j].servicio = servicioPosible;
+					}
+					
+					else if(servicioPosible.equals("HOSP")){
+						if(!Excepciones.excepcionesIngresos(j)){
+							if(Inicio.listaDocumentos[j].fisica.numPaginas > 2 
+									&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("CMA")
+									&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("Quirófano")){
+										
+								Inicio.listaDocumentos[j].nombreNormalizado = "Hospitalización";
+							}
+							Inicio.listaDocumentos[j].servicio = servicioPosible;
+						}
+						
+					}
+					else if(!servicioPosible.equals("")){
+						Inicio.listaDocumentos[j].servicio = servicioPosible;
+					}
+				}
+				
+				i= Inicio.separadores.get(numSeparador) -1 ;
+				numSeparador++;
+			}
+			
+
+			
+			int errores = 0;
+			for(int i=0;i<Inicio.listaDocumentos.length;i++){
+				if(!Inicio.listaDocumentos[i].renombraFichero(Inicio.listaDocumentos[0]))
+					errores++;
+			}
+			
+			System.out.println(errores + " errores");
+			        					
+			Inicio.modelo = new DefaultListModel();
+
+			//	Almacena las carpetas por las que navega el usuario
+			if(tamaño>0){
+				String auxS = pdfs.rutaPdfs[0];
+				int auxInt = auxS.lastIndexOf("\\");
+				auxS = auxS.substring(0,auxInt);
+				auxInt = auxS.lastIndexOf("\\");
+				auxS = auxS.substring(0, auxInt);
+				//System.out.println(aux);
+				Inicio.carpetasAbiertas.add(auxS);
+				
+			}
+			        					
+			for(int i=0;i<tamaño;i++){
+				Inicio.modelo.addElement(pdfs.nombrePdfs[i]);
+				objetoPuente[i] = pdfs.nombrePdfs[i];
+				rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
+				Inicio.rutaCompletaPdfs[i] = pdfs.rutaPdfs[i];
+			}
+			
+			Inicio.tamañoCarpetaPdf = tamaño;
+			
+			//	Determina el directorio firmados
+			        					
+			listaPdfs.setModel(Inicio.modelo);
+//      					listaPdfs.setFont(new Font("Arial",Font.BOLD,10));
+	    	setTitle(pdfs.getRutaCarpeta());
+			Inicio.ficherosCargados= true;
+		}
+        if(Inicio.ficherosCargados){
+        	vp.dispose();
+        	if(Inicio.ventanaRevisionAbierta == false){
+	        /*
+	        	 java.awt.EventQueue.invokeLater(new Runnable() {
+	        		        		        		public void run() {
+	        	        jMenu3.setEnabled(true);
+	        	        jMenu2.setEnabled(true);
+	        	        jMenuItem51.setEnabled(true);
+
+	        		//	Inicio.ventanaD = new InterFazTabla();
+	        		//	Inicio.ventanaD.setVisible(true);  
+	        	        
+	        	        Inicio.ventanaPrincipal = new VentanaPrincipal();
+	        	        Inicio.ventanaCompacta = new VentanaCompacta();
+	        			
+	        		}
+	        	});
+			*/
+
+        		Inicio.ventanaPrincipal = new VentanaPrincipal();
+    	        Inicio.ventanaCompacta = new VentanaCompacta();
+	        	Inicio.ventanaPrincipal.setBounds(Inicio.coordenadas.coordenadas[3].x, Inicio.coordenadas.coordenadas[3].y, 750, 650);
+    	        Inicio.ventanaCompacta.setBounds(Inicio.coordenadas.coordenadas[2].x, Inicio.coordenadas.coordenadas[2].y, 750, 180);
+
+        		if(visualizacion == 2 || visualizacion == 1){
+    	        	Inicio.ventanaPrincipal.setVisible(false);
+        	        Inicio.ventanaCompacta.setVisible(false);
+        			
+        	        //Inicio.ventanaA3 = new VentanaA3(true);
+        	        Inicio.ventanaIntegral = new VentanaIntegral();
+        	        Inicio.ventanaIntegral.setBounds(Inicio.coordenadas.coordenadas[4].x, Inicio.coordenadas.coordenadas[4].y, 360,1150);
+        	        
+        	        // Inicio.ventanaMicro = new VentanaMicro();
+        	        //Inicio.ventanaMicro.setBounds(Inicio.coordenadas.coordenadas[5].x, Inicio.coordenadas.coordenadas[5].y, 750, 180);
+        	        
+        	        // Inicio.ventanaNombres = new VentanaNombres();
+        	        // Inicio.ventanaNombresYServicios = new VentanaNombresYServicios();
+        			if(Inicio.nombrePc.equals("mahc13p")){
+        				Inicio.acrobatAntiguo = true;
+        				Inicio.rutaFocoAcrobat = "cal\\FocoAcrobatV2.exe";
+        			}
+        			else{
+        				Inicio.rutaFocoAcrobat = "cal\\FocoAcrobatV.exe";
+        			}
+        			Inicio.ventanaExplorador.setState(Frame.ICONIFIED);
+        		}
+    	        
+    	        File archivo2 = new File(Inicio.rutaFocoAcrobat);
+    	        File archivo3 = new File(Inicio.rutaFocoNHC);
+    	        try {
+    				 Process p = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo2);
+    				 Process pNHC = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + archivo3);
+    	        	    		        	        	
+    			} catch (IOException e1) {
+    				// TODO Auto-generated catch block
+    				e1.printStackTrace();
+    			}
+    	        
+	        	Inicio.ventanaRevisionAbierta = true;
+
+        	}
+        	
+        	if(Inicio.documentacionDeUrgencias){
+        		renombraURG();
+        	}
+        	
+        	/*
+        	else{
+        		if(Inicio.separadores.get(0) == -1){
+	        		JOptionPane.showMessageDialog(null, "No se ha detectado un separador. Puedes fijar el" +
+	        				" servicio de los documentos, en el botón fijar servicios");
+	        	}
+        	}
+        	*/
+        	vp.dispose();
+        }
+    }
+	
+	
+	
     // Variables declaration - do not modify
     static javax.swing.JList listaPdfs;
 

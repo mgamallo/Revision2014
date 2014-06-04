@@ -101,6 +101,23 @@ public class EscribirExcel {
             numero = new jxl.write.Number(indicePantallas+8,numFilaUser,Inicio.coordenadas.coordenadas[3].y); 
             hojaE.addCell(numero); 
             
+            int pref2 = 0;
+            if(Inicio.numeroPantallas == 2){
+            	pref2 = 23;
+            }
+            else{
+            	pref2 = 19;
+            }
+            
+            numero = new jxl.write.Number(pref2,numFilaUser,Inicio.coordenadas.coordenadas[4].x); 
+            hojaE.addCell(numero);
+            numero = new jxl.write.Number(pref2+1,numFilaUser,Inicio.coordenadas.coordenadas[4].y); 
+            hojaE.addCell(numero); 
+            numero = new jxl.write.Number(pref2+2,numFilaUser,Inicio.coordenadas.coordenadas[5].x); 
+            hojaE.addCell(numero);
+            numero = new jxl.write.Number(pref2+3,numFilaUser,Inicio.coordenadas.coordenadas[5].y); 
+            hojaE.addCell(numero); 
+            
             //System.out.println(Inicio.coordenadas.coordenadas[3]);
             
             libroEscritura.write();

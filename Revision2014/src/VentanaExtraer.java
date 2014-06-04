@@ -114,7 +114,8 @@ public class VentanaExtraer extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				Inicio.ventanaCompacta.habilitarTeclas(Inicio.ventanaCompacta.jBDeshabilitar.getText());
+				Inicio.utiles.habilitarTeclas(Inicio.jBDeshabilitar.getText());
+				Inicio.ventanaA3.habilitarTeclas(Inicio.ventanaA3.jBDeshabilitar.getText());
 				dispose();
 			}
 		});

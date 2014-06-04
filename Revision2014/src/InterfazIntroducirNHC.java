@@ -49,7 +49,8 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
         setModal(false);
         setPreferredSize(new java.awt.Dimension(400, 120));
         setResizable(false);
-        setLocationRelativeTo(botonOrigen);
+        // setLocationRelativeTo(botonOrigen);
+        setLocation(1000, 10);
         setAlwaysOnTop(true);
 
         jLNumero.setText("Introduce el NHC");

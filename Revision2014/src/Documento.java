@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfDestination;
+import com.itextpdf.text.pdf.PdfName;
+import com.itextpdf.text.pdf.PdfNumber;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -276,24 +279,61 @@ public class Documento {
 	}
 	
 	
-	boolean renombraFichero(){
+	boolean renombraFichero(Documento documentoInicial){
+		
+		/***************  También rota los ekgs   ************************/
 		
 		String rutaOriginal = "";
 					
+		boolean indicadorNumeroCarpeta = false;
+		boolean nombreCarpetaAuto = false;
 		
-		System.out.println("Esta es la ruta de urgencias" + Inicio.rutaDirectorio);
+		String carpetaRenombradaAuto ="";
+		String numeroCarpeta = "";
+
 		int indexCarpeta = Inicio.rutaDirectorio.lastIndexOf("\\");
 		
 		String carpeta = Inicio.rutaDirectorio.substring(indexCarpeta);
-		//System.out.println(carpeta);
+		System.out.println(carpeta);
+		
+		if(carpeta.contains("#") ){
+			indicadorNumeroCarpeta = true;
+			int posicionAlm = carpeta.indexOf("#");
+			int z = 1;
+			while(carpeta.charAt(posicionAlm + z) != ' '){
+				numeroCarpeta += carpeta.charAt(posicionAlm + z);
+				z++;
+			}
+			
+			System.out.println("El numero de carpeta es... " + numeroCarpeta);
+			
+			if(posicionAlm == 1){
+				nombreCarpetaAuto = true;
+				
+				
+				int indexNombrePdf = documentoInicial.rutaArchivo.lastIndexOf("\\");
+				String nuevoNombrePdf = documentoInicial.rutaArchivo.substring(indexNombrePdf);
+				
+				int aux_1 = nuevoNombrePdf.lastIndexOf("_");
+				String hora = nuevoNombrePdf.substring(aux_1 + 1,aux_1 + 5);
+				System.out.println("La hora es... " + hora);
+				String fecha = nuevoNombrePdf.substring(aux_1 - 8, aux_1);
+				System.out.println("La fecha es... " + fecha);
+				
+				carpetaRenombradaAuto = "\\" + fecha + " " + hora + " " + carpeta.substring(1,carpeta.length());
+				System.out.println("Nombre carpeta renombrada auto... " + carpetaRenombradaAuto);
+				carpeta = carpetaRenombradaAuto;
+			}
+		}
+		
 		String raiz = Inicio.rutaDirectorio.substring(0,indexCarpeta);
-		//System.out.println(raiz);
+		System.out.println(raiz);
 		int indexRaiz = raiz.lastIndexOf("\\");
-		//System.out.println(indexRaiz);
+		System.out.println(indexRaiz);
 		raiz = raiz.substring(0,indexRaiz);
-		//System.out.println(raiz);
+		System.out.println(raiz);
 		raiz += "\\02 Revisado" + carpeta;
-		//System.out.println(raiz);
+		System.out.println(raiz);
 		
 		
 		File fichero = new File(raiz);
@@ -310,6 +350,9 @@ public class Documento {
 		
 		int indice= raiz.lastIndexOf(".pdf");
 		String nuevaRuta = raiz.substring(0, indice);
+		if(indicadorNumeroCarpeta){
+			nuevaRuta += " $" + numeroCarpeta;
+		}
 		nuevaRuta = nuevaRuta + " @" + nhc + " @" + servicio + " @" + this.nombreNormalizado +" r.pdf";
 		
 		
@@ -321,15 +364,47 @@ public class Documento {
 			
 			PdfReader pdf = new PdfReader(rutaArchivo);
 			
+			/****************   Mira si es un ekg y está en formato vertical, lo rota    ***********************/
+			
+			System.out.println("Nhc: " + nhc);
+			System.out.println("Servicio: " + servicio);
+			System.out.println("Nombre: " + nombreNormalizado);
+			
+			/*
+			if(		(servicio.equals("CAR")&& nombreNormalizado.equals("X")) ||
+					(servicio.equals("ANR")&& nombreNormalizado.equals("X")) || 
+					 nombreNormalizado.equals("EKG")){
+			*/
+			
+			if(		(servicio.equals("CAR")|| servicio.equals("ANR")) && nombreNormalizado.equals(Inicio.EKG)){
+				
+						// System.out.println("Es un ekg...");
+						boolean girado = false;
+						for(int z=1;z <= pdf.getNumberOfPages();z++){
+							Rectangle formatoPagina = pdf.getPageSize(z);
+							int alto = (int)formatoPagina.getHeight();
+							int ancho = (int) formatoPagina.getWidth();
+							//	Hoja vertical
+							if(alto >= ancho){
+								pdf.getPageN(z).put(PdfName.ROTATE, new PdfNumber(90));
+								girado = true;
+							}
+						}
+						if(girado)
+							nombreNormalizado = Inicio.EKG;
+				
+			}
+			
 			PdfStamper stp = new PdfStamper(pdf, new FileOutputStream(nuevaRuta));
 			PdfWriter writer = stp.getWriter();
 			PdfAction pdfAcc;
 			
+			/*
 			if(this.fisica.tamañoPagina == 1){
 				pdfAcc = PdfAction.gotoLocalPage(1, new PdfDestination(PdfDestination.XYZ,fisica.dimensiones.ancho*2/3,-1, 1), writer);
 				writer.setOpenAction(pdfAcc);
 			}
-			
+			*/
 		
 					/*
 					else{
@@ -392,7 +467,7 @@ public class Documento {
 	void detectaEKGs(){
 		if(this.nombreNormalizado.equals("X") && !this.servicio.equals("Separador")){
 			if(this.fisica.tamañoPagina == 0 && this.fisica.vertical == 2){
-				this.nombreNormalizado = "EKG";
+				this.nombreNormalizado = Inicio.EKG;
 				}
 		}
 	}
@@ -432,7 +507,7 @@ class Fisica{
 	
 	Dimensiones dimensiones = new Dimensiones();
 	int vertical = 1;			//	1 vertical; 2 horizontal; 0 variable
-	int tamañoPagina = 1;		//	0 A4; 1 A3; -1 A5; 3 A4 o A5
+	int tamañoPagina = 0;		//	0 A4; 1 A3; -1 A5; 3 A4 o A5
 	int numPaginas = 1;
 	int peso = 0;
 }

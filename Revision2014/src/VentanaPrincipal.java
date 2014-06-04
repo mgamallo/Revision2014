@@ -50,12 +50,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jBFijarServicio = new javax.swing.JButton();
         jBFijarNombres = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+
         jPanel1 = new javax.swing.JPanel();
         jScrollServicio = new javax.swing.JScrollPane();
-        jLServicios = new javax.swing.JList();
+        // jLServicios = new javax.swing.JList();
         jScrollNombresDoc = new javax.swing.JScrollPane();
-        jLNombresDoc = new javax.swing.JList();
+        // Inicio.jLNombresDoc = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListHabituales1 = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -114,7 +114,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 				// TODO Auto-generated method stub
 				//Icon icono = new ImageIcon(getClass().getResource("/iconos/maletin48x48.png"));
 				new FocalAdobe(100);
-				ventanaRenombrarServicios();
+				Inicio.utiles.ventanaRenombrarServicios();
 			}
 
 		});
@@ -131,7 +131,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ventanaRenombrarNombres();
+				Inicio.utiles.ventanaRenombrarNombres();
 				new FocalAdobe(100);
 			}
 
@@ -196,9 +196,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    			public void actionPerformed(ActionEvent e) {
    				// TODO Auto-generated method stub
    				
-   				jLServicios.setSelectedValue("HOSP", true);
-   				jLNombresDoc.setModel(Inicio.excel.getDocServicio("HOSP"));
-   				actualizaServicio();
+   				Inicio.jLServicios.setSelectedValue("HOSP", true);
+   				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("HOSP"));
+   				Inicio.utiles.actualizaServicio();
    			}
    		});
 
@@ -210,9 +210,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    			public void actionPerformed(ActionEvent e) {
    				// TODO Auto-generated method stub
    				
-   				jLServicios.setSelectedValue("CIA", true);
-   				jLNombresDoc.setModel(Inicio.excel.getDocServicio("CIA"));
-   				actualizaServicio();
+   				Inicio.jLServicios.setSelectedValue("CIA", true);
+   				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("CIA"));
+   				Inicio.utiles.actualizaServicio();
    			}
    		});
 
@@ -223,8 +223,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    			public void actionPerformed(ActionEvent e) {
    				// TODO Auto-generated method stub
    				
-   				jLServicios.setSelectedValue("Des", true);
-   				actualizaServicio();
+   				Inicio.jLServicios.setSelectedValue("Des", true);
+   				Inicio.utiles.actualizaServicio();
    			}
    		});
 
@@ -236,9 +236,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    			public void actionPerformed(ActionEvent e) {
    				// TODO Auto-generated method stub
    				
-   				jLServicios.setSelectedValue("ANR", true);
-   				jLNombresDoc.setModel(Inicio.excel.getDocServicio("ANR"));
-   				actualizaServicio();
+   				Inicio.jLServicios.setSelectedValue("ANR", true);
+   				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("ANR"));
+   				Inicio.utiles.actualizaServicio();
    			}
    		});
 
@@ -250,9 +250,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    			public void actionPerformed(ActionEvent e) {
    				// TODO Auto-generated method stub
    				
-   				jLServicios.setSelectedValue("CAR", true);
-   				jLNombresDoc.setModel(Inicio.excel.getDocServicio("CAR"));
-   				actualizaServicio();
+   				Inicio.jLServicios.setSelectedValue("CAR", true);
+   				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("CAR"));
+   				Inicio.utiles.actualizaServicio();
    			}
    		});
 
@@ -263,9 +263,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(!Inicio.jBServicio.equals("X") && !Inicio.jBServicio.equals("Des")){
-					renombraServicios();	
-					jLServicios.setSelectedValue(Inicio.jBServicio.getText(), true);
-					jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
+					Inicio.utiles.renombraServicios();	
+					Inicio.jLServicios.setSelectedValue(Inicio.jBServicio.getText(), true);
+					Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
 				}
 
 			}
@@ -278,14 +278,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				renombraNombres();
+				Inicio.utiles.renombraNombres();
 			}
 		});
 
-        jCheckBox1.setText("Todos");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        Inicio.jCheckBox1.setText("Todos");
+        Inicio.jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                Inicio.utiles.jCheckBox1ActionPerformed(evt);
             }
         });
 
@@ -308,7 +308,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBFijarNombres)
                 .addGap(57, 57, 57)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Inicio.jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         jPanelBotonesAuxiliaresLayout.setVerticalGroup(
@@ -321,7 +321,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addComponent(jBFijarServicio)
                 .addComponent(jBFijarNombres)
-                .addComponent(jCheckBox1))
+                .addComponent(Inicio.jCheckBox1))
         );
 
         jPanel1.setBackground(new java.awt.Color(212, 237, 248));
@@ -329,9 +329,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DefaultListModel dLM = new DefaultListModel();
 		dLM.removeAllElements();
 		dLM = Inicio.excel.listaServiciosLista;
-		dLM.addElement("Des");
 
-        jLServicios.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+		while(dLM.get(dLM.size()-1).equals("")){
+			dLM.remove(dLM.getSize()-1);
+		}
+		
+		dLM.addElement("Des");
+		
+		for(int i=dLM.size()-1;i>= 0;i--){
+			System.out.println(dLM.get(i).toString());
+		}
+		
+        Inicio.jLServicios.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         
         
   /*      
@@ -341,30 +350,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
    */     
-        jLServicios.setModel(dLM);
-        jLServicios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jLServicios.setSelectedIndex(0);
-        jScrollServicio.setViewportView(jLServicios);
+        Inicio.jLServicios.setModel(dLM);
+        Inicio.jLServicios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Inicio.jLServicios.setSelectedIndex(0);
+        jScrollServicio.setViewportView(Inicio.jLServicios);
         
-		jLServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+		Inicio.jLServicios.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				listaServiciosMouseClicked(evt);
 			}
 		});
 
-        jLNombresDoc.setBackground(new java.awt.Color(255, 255, 204));
-        jLNombresDoc.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        Inicio.jLNombresDoc.setBackground(new java.awt.Color(255, 255, 204));
+        Inicio.jLNombresDoc.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
 		if(Inicio.documentacionDeUrgencias){
-	        jLNombresDoc.setModel(Inicio.excel.getDocServicio("URG"));
+	        Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("URG"));
 		}
 		else{
-	        jLNombresDoc.setModel(Inicio.excel.getDocServicio(jLServicios.getSelectedValue().toString()));
+	        Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jLServicios.getSelectedValue().toString()));
 		}
-        jLNombresDoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jLNombresDoc.setBackground(new java.awt.Color(255, 255, 204));
-        jScrollNombresDoc.setViewportView(jLNombresDoc);
+        Inicio.jLNombresDoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Inicio.jLNombresDoc.setBackground(new java.awt.Color(255, 255, 204));
+        jScrollNombresDoc.setViewportView(Inicio.jLNombresDoc);
         
-        jLNombresDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+        Inicio.jLNombresDoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaNombresDocMouseClicked(evt);
             }
@@ -459,7 +468,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         jBApartar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBApartarActionPerformed(evt);
+                Inicio.utiles.jBApartarActionPerformed(evt);
             }
         });
 
@@ -469,7 +478,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         jBCarpeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	jBCarpetaActionPerformed(evt);
+            	Inicio.utiles.jBCarpetaActionPerformed(evt);
                 //jPanel1.requestFocus();
             }
         });
@@ -553,7 +562,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jBGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 // jBGrabarActionPerformed(evt);
-            	registraCambiosFinales();
+            	Inicio.utiles.registraCambiosFinales();
             }
         });
 
@@ -588,66 +597,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    
-    protected void jBCarpetaActionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
-    	String cadena = "explorer.exe " + Inicio.carpetaActualRevisando;
-		try {
-			Runtime.getRuntime().exec(cadena);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	protected void ventanaRenombrarNombres() {
-		// TODO Auto-generated method stub
-		Object seleccion = JOptionPane.showInputDialog(
-				Inicio.jBServicio, "¿Cambiar el nombre de todos los pdfs hasta el próximo separador?",
-				"Fijar nombre en bloque",
-				JOptionPane.OK_OPTION,
-				null, // icono, // unIcono, // null para icono defecto
-				new Object[] { "SI", "NO" },
-				"NO"
-				);
-		if(seleccion.equals("SI")){
-			renombraNombres();
-		}
-	}
-    
-	private void renombraNombres(){
-		for(int i=0;i < Inicio.separadores.size()-1;i++){
-			if(Inicio.numeroPdf >= Inicio.separadores.get(i) && Inicio.numeroPdf < Inicio.separadores.get(i+1)){
-				for(int j= Inicio.numeroPdf + 1; j < Inicio.separadores.get(i+1); j++){
-					if( Inicio.listaDocumentos[j].nombreNormalizado != "X" && Inicio.listaDocumentos[j].nombreNormalizado != Inicio.jBNombreDoc.getText()){
-						Inicio.listaDocumentos[j].semaforoAmarilloNombre = true;
-					}
-					Inicio.listaDocumentos[j].nombreNormalizado = Inicio.jBNombreDoc.getText();
-					// Inicio.listaDocumentos[j].revisado = true;
-					System.out.println("Modificando pdf numero " + j + " a " + Inicio.listaDocumentos[j].nombreNormalizado);
-					
-				}
-			}
-		}
-	}
-
-	protected void ventanaRenombrarServicios() {
-		// TODO Auto-generated method stub
-		
-		Object seleccion = JOptionPane.showInputDialog(
-				Inicio.jBServicio, "¿Fijar el servicio de todos los pdfs hasta el próximo separador?",
-				"Fijar servicio en bloque",
-				JOptionPane.OK_OPTION,
-				null, // icono, // unIcono, // null para icono defecto
-				new Object[] { "SI", "NO" },
-				"NO"
-				);
-		if(seleccion.equals("SI")){
-			renombraServicios();	
-			jLServicios.setSelectedValue(Inicio.jBServicio.getText(), true);
-			jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
-		}
-	}
 
 	protected void listaHabituales2DocMouseClicked(MouseEvent evt) {
 		// TODO Auto-generated method stub
@@ -659,7 +608,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		Inicio.jBNombreDoc.setIcon(null);
 		Inicio.jBNombreDocp.setIcon(null);
 		jListHabituales1.clearSelection();
-		jLNombresDoc.clearSelection();
+		Inicio.jLNombresDoc.clearSelection();
 		
 		new FocalAdobe(100);
 	}
@@ -677,7 +626,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 				.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDoc.setIcon(null);
 		Inicio.jBNombreDocp.setIcon(null);
-		jLNombresDoc.clearSelection();
+		Inicio.jLNombresDoc.clearSelection();
 		jListHabituales2.clearSelection();
 		
 		new FocalAdobe(100);
@@ -686,8 +635,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	protected void listaNombresDocMouseClicked(MouseEvent evt) {
 		// TODO Auto-generated method stub
 		
-		Inicio.jBNombreDoc.setText(jLNombresDoc.getSelectedValue().toString());
-		Inicio.jBNombreDocp.setText(jLNombresDoc.getSelectedValue().toString());
+		Inicio.jBNombreDoc.setText(Inicio.jLNombresDoc.getSelectedValue().toString());
+		Inicio.jBNombreDocp.setText(Inicio.jLNombresDoc.getSelectedValue().toString());
 		Inicio.jBNombreDoc.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDocp.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDoc.setIcon(null);
@@ -702,337 +651,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	protected void listaServiciosMouseClicked(MouseEvent evt) {
 		// TODO Auto-generated method stub
 		
-		actualizaServicio();
-	}
-	
-	private void actualizaServicio(){
-    	Inicio.jBServicio.setText(jLServicios.getSelectedValue().toString());
-		Inicio.jBServiciop.setText(jLServicios.getSelectedValue().toString());
-		jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
-		
-		Inicio.jBServicio.setBackground(new java.awt.Color(153, 255, 153));
-		Inicio.jBServiciop.setBackground(new java.awt.Color(153, 255, 153));
-		Inicio.jBServicio.setIcon(null);
-		Inicio.jBServiciop.setIcon(null);
-		jCheckBox1.setSelected(false);
-		
-				
-		if(Inicio.jBNHC.getText().equals("Separador")){
-			Inicio.jBNHC.setBackground(new java.awt.Color(153, 255, 153));
-			Inicio.jBNHCp.setBackground(new java.awt.Color(153, 255, 153));
-			
-
-			
-			renombraServicios();
-		}
-		else{
-			if(Inicio.jBServicio.getText().equals("CIA")){
-				if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas > 2){
-					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Quirófano";
-					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-				}
-			}
-			if(Inicio.jBServicio.getText().equals("HOSP")){
-				if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas > 2){
-					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Hospitalización";
-					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
-				}
-			}
-		}
-	
-		
-		
-		new FocalAdobe(100);
+		Inicio.utiles.actualizaServicio();
 	}
 	
 
-	protected void registraCambiosFinales() {
-		// TODO Auto-generated method stub
-		
-		if(Inicio.ventanaComprobacion != null){
-			Inicio.ventanaComprobacion.dispose();
-		}
-		
-    	new Acrobat().guardarPagina();
-    	revisarPropiedadesDocumento();
-    	
-    	Inicio.ventanaComprobacion = new VentanaComprobar();
-    	if(Inicio.erroresAntesRegistrar){
-    		int opcion = JOptionPane.showOptionDialog(null, "Hay errores en la revisión. ¿Quieres continuar registrando o quieres corregir los errores?", "Registrando", 
-    				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null, new Object[] {"Continuar","Corregir"}, "Corregir");
-    		if(opcion == 0){
-    			Inicio.erroresAntesRegistrar = false;
-    			Inicio.ventanaComprobacion.dispose();
-    		}
-    		else{
-    			Inicio.erroresAntesRegistrar = true;
-    		}
-    	}
- 
-    	
-    	if(!Inicio.erroresAntesRegistrar){
-	    	new CerrarTodo().closePdf();
-	    	System.out.println("Cerrados los pdfs");
-	    	
-	    	
-	    	
-	    	
-	    	for(int i=0;i<Inicio.listaDocumentos.length;i++){
-	    		//if(Inicio.listaDocumentos[i].revisado){
-	    			
-	    		/*
-	    			if( Inicio.listaDocumentos[i].fisica.peso > 12){
-	    				
-	    			}
-	    		*/
-	    		
-	    			File nombreAntiguo = new File(Inicio.listaDocumentos[i].rutaArchivo);
-	    			
-	    			//System.out.println("Ruta apartar:");
-	    			//System.out.println(Inicio.listaDocumentos[i].apartaFichero());
-	    			
-	    			if(Inicio.listaDocumentos[i].nhc.equals("Eliminar")){
-	    				if(nombreAntiguo.delete()){
-	    					System.out.println("Fichero eliminado");
-	    				}else{
-	    					System.out.println("Fichero imposible de eliminar");
-	    				}
-	    			}
-	    			else if(Inicio.listaDocumentos[i].nhc.equals("Apartar")){
-	    				
-	    				int aux = Inicio.listaDocumentos[i].rutaArchivo.lastIndexOf("\\");
-	    				String nombrepdf = Inicio.listaDocumentos[i].rutaArchivo.substring(aux);
-	    				
-	    				String rutaNueva = Inicio.listaDocumentos[i].apartaFichero() + "Apartado por " + Inicio.usuario + ".";
-	    				
-	    				File carpetaNueva = new File(rutaNueva);
-	    				carpetaNueva.mkdirs();
-	    				
-	    				rutaNueva = rutaNueva + nombrepdf;
-	    				System.out.println("Ruta apartado... " + rutaNueva);
-	    				
-	    				
-	    				File nombreNuevo = new File(rutaNueva);
-		    			boolean correcto = nombreAntiguo.renameTo(nombreNuevo);
-		    			if(correcto){
-		    				System.out.println("Renombrado con exito");
-		    			}
-		    			else{
-		    				System.out.println("Error al renombrar");
-		    			}
-		    			
-	    			}
-	    			else{
-	    				String rutaNueva = Inicio.listaDocumentos[i].registraFichero();
-		    			File nombreNuevo = new File(rutaNueva);
-		    			boolean correcto = nombreAntiguo.renameTo(nombreNuevo);
-		    			if(correcto){
-		    				System.out.println("Renombrado con exito");
-		    			}
-		    			else{
-		    				System.out.println("Error al renombrar");
-		    			}
-	    			}
-	    			
-	    			
-	    			
-	    			
-	    		//}
-	    		/*
-	    		String rutaNueva = Inicio.listaDocumentos[i].registraFichero();
-	    		
-	    			try {
-	    				
-	    				//	Formatea las paginas en ancho
-	    				
-	    				if(Inicio.listaDocumentos[i].fisica.tamañoPagina != 1){
-	    					PdfReader pdf = new PdfReader(Inicio.listaDocumentos[i].rutaArchivo);
-							
-	    					PdfStamper stp = new PdfStamper(pdf, new FileOutputStream(rutaNueva));
-							PdfWriter writer = stp.getWriter();
-							PdfAction pdfAcc;
+	
 
-							pdfAcc = PdfAction.gotoLocalPage(1,new PdfDestination(PdfDestination.FITH), writer);
-							
-							writer.setOpenAction(pdfAcc);
-							stp.close();
-							pdf.close();
-							
-	    				}
- 					
-					}  catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (DocumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	    			*/
-	    		}
-	       	
-	    	
-	    	Inicio.listaCarpetasRegistradas.add(Inicio.rutaCarpetaEscaneadaUsuario);
-	    		    	
-	    	Inicio.modelo.removeAllElements();
-	    	Inicio.jBNHC.setText("");
-	    	Inicio.jBNHCp.setText("");
-	    	Inicio.jBServicio.setText("");
-	    	Inicio.jBServiciop.setText("");
-	    	Inicio.jBNombreDoc.setText("");
-	    	Inicio.jBNombreDocp.setText("");
 
-    			
-    		}
-
-    	//	    	Eliminar la carpeta de asociados
-		/*
-		File borrarCarpeta = new File(Inicio.rutaCarpetaEscaneadaUsuario);
-		
-		File[] listaFicheros = borrarCarpeta.listFiles();
-		for(int z=0;z<listaFicheros.length;z++){
-			if(listaFicheros[z].delete())
-				System.out.println("Fichero borrado en la carpeta escaneado");;
-		}
-		
-		if(borrarCarpeta.delete()){
-			System.out.println("El directorio ha sido borrado");
-		}else{
-			System.out.println("Directorio no borrado");
-		}
-		*/
- 
-	}
 
     
-	protected void jBApartarActionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
-		
-		Inicio.jBNHC.setText("Apartar");
-		Inicio.jBNHCp.setText("Apartar");
-		Inicio.jBServicio.setText("Apartar");
-		Inicio.jBServiciop.setText("Apartar");
-		Inicio.jBNombreDoc.setText("Apartar");
-		Inicio.jBNombreDocp.setText("Apartar");
-		
-		Inicio.jBNHC.setBackground(Color.gray);
-		Inicio.jBNHCp.setBackground(Color.gray);
-		Inicio.jBServicio.setBackground(Color.gray);
-		Inicio.jBServiciop.setBackground(Color.gray);
-		Inicio.jBNombreDoc.setBackground(Color.gray);
-		Inicio.jBNombreDocp.setBackground(Color.gray);
-	}
 
-	protected void jCheckBox1ActionPerformed(ActionEvent evt) {
-		// TODO Auto-generated method stub
-		if (jCheckBox1.isSelected()) {
-			jLNombresDoc.setModel(Inicio.excel.listaDocumentosDLM);
-		} else if (!jCheckBox1.isSelected()) {
-			jLNombresDoc.setModel(Inicio.excel.getDocServicio(jLServicios
-					.getSelectedValue().toString()));
-		}
-		
-	}
 
-	   void revisarPropiedadesDocumento(){
-	    	if(!Inicio.listaDocumentos[Inicio.numeroPdf].nhc.equals(Inicio.jBNHCp.getText())){
-	    		System.out.println("Cambiamos el nhc");
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].nhc = Inicio.jBNHCp.getText();
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].revisado = true;
-	    	}
-	    	if(!Inicio.listaDocumentos[Inicio.numeroPdf].servicio.equals(Inicio.jBServiciop.getText())){
-	    		System.out.println("Cambiamos el servicio");
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].servicio = Inicio.jBServiciop.getText();
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].revisado = true;
-	    	}
-	    	if(!Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado.equals(Inicio.jBNombreDocp.getText())){
-	    		System.out.println("Cambiamos el nombre del documento");
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = Inicio.jBNombreDocp.getText();
-	    		Inicio.listaDocumentos[Inicio.numeroPdf].revisado = true;
-	    	}
-	    	Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloServicio = false;
-	    	Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNombre = false;
-
-	    }
-	   
-		private void renombraServicios(){
-			for(int i=0;i < Inicio.separadores.size()-1;i++){
-				if(Inicio.numeroPdf >= Inicio.separadores.get(i) && Inicio.numeroPdf < Inicio.separadores.get(i+1)){
-					for(int j= Inicio.numeroPdf + 1; j < Inicio.separadores.get(i+1); j++){
-						if( Inicio.listaDocumentos[j].servicio != "X" && Inicio.listaDocumentos[j].servicio != Inicio.jBServicio.getText()){
-							Inicio.listaDocumentos[j].semaforoAmarilloServicio = true;
-						}
-
-							//	Comprobamos si el servicio es anestesia para hacer el cambio anrc - carc
-							if(Inicio.jBServicio.getText().equals("ANR")){
-								if(Inicio.listaDocumentos[j].nombreNormalizado.equals("EKG")){
-									Inicio.listaDocumentos[j].servicio = "CAR";
-								}
-								else{
-									Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
-								}
-							}
-							
-							else if(Inicio.jBServicio.getText().equals("ORL")){
-								if(Inicio.listaDocumentos[j].nombreNormalizado.equals("EKG")){
-									Inicio.listaDocumentos[j].nombreNormalizado = "Videonistagmografía";
-								}
-								Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
-							}
-
-							else if(Inicio.jBServicio.getText().equals("CIA")){
-								if(Inicio.listaDocumentos[j].fisica.numPaginas > 2){
-									Inicio.listaDocumentos[j].nombreNormalizado = "Quirófano";
-								}
-								Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
-							}
-							
-							else if(Inicio.jBServicio.getText().equals("HOSP")){
-								if(!excepcionesIngresos(j)){
-									if(Inicio.listaDocumentos[j].fisica.numPaginas > 2 ){
-										Inicio.listaDocumentos[j].nombreNormalizado = "Hospitalización";
-									}
-									Inicio.listaDocumentos[j].servicio = "HOSP";
-								}
-								
-							}
-							else{
-								Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
-							}
-							
-							
-							// Inicio.listaDocumentos[j].revisado = true;
-							System.out.println("Modificando pdf numero " + j + " a " + Inicio.listaDocumentos[j].servicio);
-							
-						}
-				}
-			}
-		}	   
-
-		
-		private boolean excepcionesIngresos(int numPdf) {
-			// TODO Auto-generated method stub
-			if(Inicio.listaDocumentos[numPdf].nombreNormalizado.equals("Consentimento informado") ){
-				Inicio.listaDocumentos[numPdf].servicio = "X";
-				
-				/*Inicio.jBServicio.setText("");
-				Inicio.jBServiciop.setText("");
-				Inicio.jBServicio.setBackground(Color.red);
-				Inicio.jBServiciop.setBackground(Color.red);
-				*/
-				
-				System.out.println("Esta es una excepción al ingreso");
-				
-				return true;
-			}
-			return false;
-		}
-		
-		
 
 
     // Variables declaration - do not modify                     
@@ -1053,10 +682,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBFijarNombres;
     private javax.swing.JButton jBCarpeta;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
+
     private javax.swing.JLabel jLNHC;
-    private javax.swing.JList jLNombresDoc;
-    private javax.swing.JList jLServicios;
+    // private javax.swing.JList jLNombresDoc;
+    // private javax.swing.JList jLServicios;
     private javax.swing.JLabel jLServicio;
     private javax.swing.JLabel jLNombreDoc;
     private javax.swing.JList jListHabituales1;

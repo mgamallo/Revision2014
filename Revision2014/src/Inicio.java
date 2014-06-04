@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -31,6 +33,13 @@ public class Inicio extends JFrame {
 	
 	static String rutaFocoAcrobat = "cal\\FocoAcrobat.exe";
 	static String rutaFocoNHC = "cal\\FocoNHC.exe";
+	static String rutaFocoAcrobatV = "cal\\FocoAcrobatV.exe";
+
+	static boolean menuVertical = false;
+	
+	static final String CONSENTIMIENTO = "Consentimento informado";
+	static final String EKG = "ECG";
+	
 	
 	static boolean documentacionDeUrgencias = false;
 	
@@ -40,6 +49,12 @@ public class Inicio extends JFrame {
     static JButton jBServiciop = new javax.swing.JButton();
     static JButton jBNombreDocp = new javax.swing.JButton();
     static JButton jBNHCp = new javax.swing.JButton();
+    static JButton jBDeshabilitar;
+    
+    static JCheckBox jCheckBox1 = new JCheckBox();
+    
+    static JList jLServicios = new javax.swing.JList();
+    static JList jLNombresDoc = new javax.swing.JList();
     
     static LeerExcel excel;
     static ArrayList<Object> documentosServicio;
@@ -59,6 +74,11 @@ public class Inicio extends JFrame {
     static VentanaComprobar ventanaComprobacion;
     static InterfazIntroducirNHC ventanaIntroducirNHC;
     static VentanaExtraer ventanaExtraer;
+    static VentanaA3 ventanaA3;
+    static VentanaNombresYServicios ventanaNombresYServicios;
+    static VentanaNombres ventanaNombres;
+    static VentanaIntegral ventanaIntegral;
+    static VentanaMicro ventanaMicro;
      
     static int numeroPdf;
     static int tamañoCarpetaPdf;
@@ -83,6 +103,8 @@ public class Inicio extends JFrame {
     
     static String auxRutaImagen = "";				//	Para ayudar a la hora de asignar una imagen a una norma, aviso, comentario...
 	
+    static Utiles utiles = new Utiles();
+    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

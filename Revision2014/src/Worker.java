@@ -35,7 +35,7 @@ class Worker extends SwingWorker<Double, Integer>{
 		
 		int errores = 0;
 		for(int i=0;i<Inicio.listaDocumentos.length;i++){
-			if(!Inicio.listaDocumentos[i].renombraFichero())
+			if(!Inicio.listaDocumentos[i].renombraFichero(Inicio.listaDocumentos[0]))
 				errores++;
 		}
 		System.out.println(errores + " errores");
