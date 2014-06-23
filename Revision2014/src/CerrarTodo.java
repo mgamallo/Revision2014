@@ -17,18 +17,25 @@ public class CerrarTodo {
 		// String cmd3 = "taskkill.exe /F /IM TeclasRapidas.exe /T";
 		 String cmd4 = "taskkill.exe /F /IM FocoAcrobat.exe /T";
 		 String cmd5 = "taskkill.exe /F /IM FocoNHC.exe /T";
+			
+		 String cmd6 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
+		 String cmd7 = "taskkill.exe /F /IM FocoAcrobatV.exe /T";
 
-		 Process hijo, hijo2, hijo3, hijo4;
+		 Process hijo, hijo2, hijo3, hijo4, hijo6, hijo7;
 		 try {
 				hijo = Runtime.getRuntime().exec(cmd);
 				hijo2 = Runtime.getRuntime().exec(cmd2);
 				hijo3 = Runtime.getRuntime().exec(cmd5);
 				hijo4 = Runtime.getRuntime().exec(cmd4);
+				hijo6 = Runtime.getRuntime().exec(cmd5);
+				hijo7 = Runtime.getRuntime().exec(cmd4);
 				
 				hijo.waitFor();
 				hijo2.waitFor();
 				hijo3.waitFor();
 				hijo4.waitFor();
+				hijo6.waitFor();
+				hijo7.waitFor();
 				
 				Thread.sleep(500);
 								

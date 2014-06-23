@@ -128,11 +128,18 @@ public class VentanaIntegral extends javax.swing.JFrame {
         		int pdfNumero = listaPdfs.getSelectedIndex();
         		int numArchivo = pdfNumero;
         		Inicio.numeroPdf = numArchivo;
+        		
+        		System.out.println("Pdf numero: " + Inicio.numeroPdf + "   " + pdfNumero);
+        		
         		int tamañoLista = listaPdfs.getModel().getSize();
+        		
+        		System.out.println("Tamaño lista: " + tamañoLista);
 
         		if(Inicio.menuVertical){
     				Inicio.ventanaExplorador.listaPdfs.setSelectedIndex(Inicio.numeroPdf);
     			}
+        		
+        		System.out.println("Primer atranco: " + Inicio.numeroPdf + "  " + pdfNumero);
         		
         		if(Inicio.ventanaIntroducirNHC != null){
         			Inicio.ventanaIntroducirNHC.dispose();
@@ -160,23 +167,24 @@ public class VentanaIntegral extends javax.swing.JFrame {
         			//Inicio.jBNombreDocp.setEnabled(true);
         			
     			   Inicio.jBNHC.setText(Inicio.listaDocumentos[numArchivo].nhc);
+    			   Inicio.ventanaMicro.jBNHCm.setText(Inicio.listaDocumentos[numArchivo].nhc);
     			   if(Inicio.listaDocumentos[numArchivo].nhc.equals("Separador") &&
     					   !Inicio.listaDocumentos[numArchivo].servicio.equals("X")){
     				   Inicio.jBNHC.setBackground(Color.green);
-    				   Inicio.jBNHCp.setBackground(Color.green);
+    				   Inicio.ventanaMicro.jBNHCm.setBackground(Color.green);
     			   }
     			   else if(Inicio.listaDocumentos[numArchivo].nhc.equals("Separador") || Inicio.listaDocumentos[numArchivo].nhc.contains("ERROR") ||
     					   Inicio.listaDocumentos[numArchivo].nhc.equals("NO")){
     				   Inicio.jBNHC.setBackground(Color.red);
-    				   Inicio.jBNHCp.setBackground(Color.red);
+    				   Inicio.ventanaMicro.jBNHCm.setBackground(Color.red);
     			   }
     			   else if(Inicio.listaDocumentos[numArchivo].nhc.equals("Eliminar") ||
     					   Inicio.listaDocumentos[numArchivo].nhc.equals("Apartar")){
     				   Inicio.jBNHC.setBackground(Color.GRAY);
-    				   Inicio.jBNHCp.setBackground(Color.GRAY);
+    				   Inicio.ventanaMicro.jBNHCm.setBackground(Color.GRAY);
     			   }else{
     				   Inicio.jBNHC.setBackground(Color.green);
-    				   Inicio.jBNHCp.setBackground(Color.green);
+    				   Inicio.ventanaMicro.jBNHCm.setBackground(Color.green);
     			   }
     			   
     			   Inicio.jBServicio.setText(Inicio.listaDocumentos[numArchivo].servicio);
@@ -196,33 +204,34 @@ public class VentanaIntegral extends javax.swing.JFrame {
  
     			   
     			   Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[numArchivo].nombreNormalizado);
-     			   if(Inicio.listaDocumentos[numArchivo].nombreNormalizado.equals("X") ){
+     			   Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.listaDocumentos[numArchivo].nombreNormalizado);
+    			   if(Inicio.listaDocumentos[numArchivo].nombreNormalizado.equals("X") ){
     				   Inicio.jBNombreDoc.setBackground(Color.red);
-    				   Inicio.jBNombreDocp.setBackground(Color.red);
+    				   Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.red);
     			   }
      			   else if(Inicio.listaDocumentos[numArchivo].nombreNormalizado.equals("Eliminar") ||
      					  Inicio.listaDocumentos[numArchivo].nombreNormalizado.equals("Apartar")){
 	   				   Inicio.jBNombreDoc.setBackground(Color.GRAY);
-	   				   Inicio.jBNombreDocp.setBackground(Color.GRAY);
+	   				   Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.GRAY);
 	   			   }
     			   else{
     				   Inicio.jBNombreDoc.setBackground(Color.green);
-    				   Inicio.jBNombreDocp.setBackground(Color.green);
+    				   Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.green);
     			   }
     			   
-    			   Inicio.jBNHCp.setText(Inicio.listaDocumentos[numArchivo].nhc);
-    			   Inicio.jBServiciop.setText(Inicio.listaDocumentos[numArchivo].servicio);
-    			   Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[numArchivo].nombreNormalizado);
+    			   Inicio.ventanaMicro.jBNHCm.setText(Inicio.listaDocumentos[numArchivo].nhc);
+    			   Inicio.ventanaMicro.jBServiciom.setText(Inicio.listaDocumentos[numArchivo].servicio);
+    			   Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.listaDocumentos[numArchivo].nombreNormalizado);
         			
     			   
     			   if(Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloServicio == true){
     				   Inicio.jBServicio.setBackground(Color.yellow);
-    				   Inicio.jBServiciop.setBackground(Color.yellow);
+    				   Inicio.ventanaMicro.jBServiciom.setBackground(Color.yellow);
     			   }
     			   
     			   if(Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc == true){
     				   Inicio.jBNHC.setBackground(Color.yellow);
-    				   Inicio.jBNHCp.setBackground(Color.yellow);
+    				   Inicio.ventanaMicro.jBNHCm.setBackground(Color.yellow);
     			   }
     			   
     			   //   Actualiza al servicio del documento
@@ -240,13 +249,15 @@ public class VentanaIntegral extends javax.swing.JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 	    	           }
-	    	           Inicio.ventanaIntroducirNHC = new InterfazIntroducirNHC(null, false, Inicio.jBNHCp);
+	    	           Inicio.ventanaIntroducirNHC = new InterfazIntroducirNHC(null, false, Inicio.ventanaMicro.jBNHCm);
 	    	           Inicio.ventanaIntroducirNHC.setVisible(true);
 	    	           
 	    	           //dialog.requestFocus();
 	    	           // jPanel1.requestFocus();
     			   }
     		   
+    			   jPanel1.requestFocus();
+    			   
        //			Desktop.getDesktop().open(archivo);
         			Robot robot = new Robot();
         			robot.delay(400);
@@ -299,9 +310,9 @@ public class VentanaIntegral extends javax.swing.JFrame {
 				if(seleccion == 0){
 					Inicio.listaDocumentos[Inicio.numeroPdf].nhc = "Separador";
 					Inicio.jBNHC.setText("Separador");
-					// Inicio.jBNHCp.setText("Separador");
+					Inicio.ventanaMicro.jBNHCm.setText("Separador");
 					Inicio.jBServicio.setText("X");
-					// Inicio.jBServiciop.setText("X");
+					Inicio.ventanaMicro.jBServiciom.setText("X");
 				}
 				new FocalAdobe(100);
 			}
@@ -352,6 +363,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
 					Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
 				}
 				jPanel1.requestFocus();
+				new Acrobat().getFocus();
 			}
 		});
 
@@ -360,6 +372,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	Inicio.utiles.renombraNombres();
             	jPanel1.requestFocus();
+            	new Acrobat().getFocus();
             }
         });
 
@@ -395,6 +408,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
    				Inicio.jLServicios.setSelectedValue("Des", true);
    				Inicio.utiles.actualizaServicio();
    				jPanel1.requestFocus();
+   				new Acrobat().getFocus();
    			}
    		});
 
@@ -410,6 +424,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
    				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("HOSP"));
    				Inicio.utiles.actualizaServicio();
    				jPanel1.requestFocus();
+   				new Acrobat().getFocus();
    			}
    		});
 
@@ -425,6 +440,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
    				Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio("CIA"));
    				Inicio.utiles.actualizaServicio();
    				jPanel1.requestFocus();
+   				new Acrobat().getFocus();
    			}
    		});
 
@@ -457,6 +473,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				new Acrobat().rotarPagina();
 				jPanel1.requestFocus();
+				new Acrobat().getFocus();
 			}
 		});
 
@@ -468,6 +485,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				Inicio.utiles.jBGrabarPagina();
 				jPanel1.requestFocus();
+				new Acrobat().getFocus();
 			}
 		});
 
@@ -479,6 +497,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	Inicio.utiles.jBCarpetaActionPerformed(evt);
                 jPanel1.requestFocus();
+                new Acrobat().getFocus();
             }
         });
 
@@ -491,20 +510,21 @@ public class VentanaIntegral extends javax.swing.JFrame {
                 // jBEliminarActionPerformed(evt);
             	
 				Inicio.jBNHC.setText("Eliminar");
-				Inicio.jBNHCp.setText("Eliminar");
+				Inicio.ventanaMicro.jBNHCm.setText("Eliminar");
 				Inicio.jBServicio.setText("Eliminar");
-				Inicio.jBServiciop.setText("Eliminar");
+				Inicio.ventanaMicro.jBServiciom.setText("Eliminar");
 				Inicio.jBNombreDoc.setText("Eliminar");
-				Inicio.jBNombreDocp.setText("Eliminar");
+				Inicio.ventanaMicro.jBNombreDocm.setText("Eliminar");
 
 				Inicio.jBNHC.setBackground(Color.gray);
-				Inicio.jBNHCp.setBackground(Color.gray);
+				Inicio.ventanaMicro.jBNHCm.setBackground(Color.gray);
 				Inicio.jBServicio.setBackground(Color.gray);
-				Inicio.jBServiciop.setBackground(Color.gray);
+				Inicio.ventanaMicro.jBServiciom.setBackground(Color.gray);
 				Inicio.jBNombreDoc.setBackground(Color.gray);
-				Inicio.jBNombreDocp.setBackground(Color.gray);
+				Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.gray);
 				
 				jPanel1.requestFocus();
+				new Acrobat().getFocus();
             }
         });
 
@@ -516,6 +536,7 @@ public class VentanaIntegral extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Inicio.utiles.jBApartarActionPerformed(evt);
                 jPanel1.requestFocus();
+                new Acrobat().getFocus();
             }
         });
 
@@ -880,11 +901,11 @@ public class VentanaIntegral extends javax.swing.JFrame {
 						&& Inicio.jBNombreDoc.getText().equals("X")) {
 					// if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas
 					// <= 2){
-					//Inicio.jBNombreDocp.setText(Inicio.EKG);
+					Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.EKG);
 					Inicio.jBNombreDoc.setText(Inicio.EKG);
-					//Inicio.jBServiciop.setText("CAR");
+					Inicio.ventanaMicro.jBServiciom.setText("CAR");
 					Inicio.jBServicio.setText("CAR");
-					//Inicio.jBNombreDocp.setBackground(Color.green);
+					Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.green);
 					Inicio.jBNombreDoc.setBackground(Color.green);
 					// }
 				}
@@ -970,14 +991,14 @@ public class VentanaIntegral extends javax.swing.JFrame {
 		// TODO Auto-generated method stub
 		Inicio.jBNombreDoc.setText(jListHabituales1.getSelectedValue()
 				.toString());
-		Inicio.jBNombreDocp.setText(jListHabituales1.getSelectedValue()
+		Inicio.ventanaMicro.jBNombreDocm.setText(jListHabituales1.getSelectedValue()
 				.toString());
 		Inicio.jBNombreDoc
 				.setBackground(new java.awt.Color(153, 255, 153));
-		Inicio.jBNombreDocp
+		Inicio.ventanaMicro.jBNombreDocm
 				.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDoc.setIcon(null);
-		Inicio.jBNombreDocp.setIcon(null);
+		Inicio.ventanaMicro.jBNombreDocm.setIcon(null);
 		Inicio.jLNombresDoc.clearSelection();
 		jListHabituales2.clearSelection();
 		
@@ -988,11 +1009,11 @@ public class VentanaIntegral extends javax.swing.JFrame {
 		// TODO Auto-generated method stub
 		
 		Inicio.jBNombreDoc.setText(jListHabituales2.getSelectedValue().toString());
-		Inicio.jBNombreDocp.setText(jListHabituales2.getSelectedValue().toString());
+		Inicio.ventanaMicro.jBNombreDocm.setText(jListHabituales2.getSelectedValue().toString());
 		Inicio.jBNombreDoc.setBackground(new java.awt.Color(153, 255, 153));
-		Inicio.jBNombreDocp.setBackground(new java.awt.Color(153, 255, 153));
+		Inicio.ventanaMicro.jBNombreDocm.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDoc.setIcon(null);
-		Inicio.jBNombreDocp.setIcon(null);
+		Inicio.ventanaMicro.jBNombreDocm.setIcon(null);
 		jListHabituales1.clearSelection();
 		Inicio.jLNombresDoc.clearSelection();
 		
@@ -1003,11 +1024,11 @@ public class VentanaIntegral extends javax.swing.JFrame {
 		// TODO Auto-generated method stub
 		
 		Inicio.jBNombreDoc.setText(Inicio.jLNombresDoc.getSelectedValue().toString());
-		//Inicio.jBNombreDocp.setText(Inicio.jLNombresDoc.getSelectedValue().toString());
+		Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.jLNombresDoc.getSelectedValue().toString());
 		Inicio.jBNombreDoc.setBackground(new java.awt.Color(153, 255, 153));
-		//Inicio.jBNombreDocp.setBackground(new java.awt.Color(153, 255, 153));
+		Inicio.ventanaMicro.jBNombreDocm.setBackground(new java.awt.Color(153, 255, 153));
 		Inicio.jBNombreDoc.setIcon(null);
-		//Inicio.jBNombreDocp.setIcon(null);
+		Inicio.ventanaMicro.jBNombreDocm.setIcon(null);
 		jListHabituales1.clearSelection();
 		jListHabituales2.clearSelection();
 		

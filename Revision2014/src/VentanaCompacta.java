@@ -578,14 +578,20 @@ public class VentanaCompacta extends javax.swing.JFrame {
 				
 				new Acrobat().rotarPagina();
 				if ((Inicio.jBServicio.getText().equals("CAR") || Inicio.jBServicio
-						.getText().equals("ANR"))
+						.getText().equals("ANR") || Inicio.documentacionDeUrgencias)
 						&& Inicio.jBNombreDoc.getText().equals("X")) {
 					// if(Inicio.listaDocumentos[Inicio.numeroPdf].fisica.numPaginas
 					// <= 2){
 					Inicio.jBNombreDocp.setText(Inicio.EKG);
 					Inicio.jBNombreDoc.setText(Inicio.EKG);
-					Inicio.jBServiciop.setText("CAR");
-					Inicio.jBServicio.setText("CAR");
+					if(Inicio.documentacionDeUrgencias){
+						Inicio.jBServiciop.setText("URG");
+						Inicio.jBServicio.setText("URG");
+					}else{
+						Inicio.jBServiciop.setText("CAR");
+						Inicio.jBServicio.setText("CAR");
+					}
+
 					Inicio.jBNombreDocp.setBackground(Color.green);
 					Inicio.jBNombreDoc.setBackground(Color.green);
 					// }

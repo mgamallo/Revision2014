@@ -58,20 +58,29 @@ public class Utiles {
 						}
 
 						else if(Inicio.jBServicio.getText().equals("CIA")){
-							if(Inicio.listaDocumentos[j].fisica.numPaginas > 2){
-								Inicio.listaDocumentos[j].nombreNormalizado = "Quirófano";
+							if(!Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.HOSPITALIZACION) 
+									&& 	!Inicio.listaDocumentos[j].nombreNormalizado.equals("Orden de ingreso")
+									&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("Órdenes médicas")){
+								if(Inicio.listaDocumentos[j].fisica.numPaginas > 2){
+									Inicio.listaDocumentos[j].nombreNormalizado = "Quirófano";
+								}
+								Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
 							}
-							Inicio.listaDocumentos[j].servicio = Inicio.jBServicio.getText();
+
 						}
 						
 						else if(Inicio.jBServicio.getText().equals("HOSP")){
-							if(!Excepciones.excepcionesIngresos(j)){
-								if(Inicio.listaDocumentos[j].fisica.numPaginas > 2 ){
-									Inicio.listaDocumentos[j].nombreNormalizado = "Hospitalización";
-								}
-								Inicio.listaDocumentos[j].servicio = "HOSP";
-							}
 							
+							if(!Inicio.listaDocumentos[j].nombreNormalizado.equals("Quirófano")
+									&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("CMA")
+									&& !Inicio.listaDocumentos[j].nombreNormalizado.equals("Folla enfermaría circulante")){
+								if(!Excepciones.excepcionesIngresos(j)){
+									if(Inicio.listaDocumentos[j].fisica.numPaginas > 2 ){
+										Inicio.listaDocumentos[j].nombreNormalizado = "Hospitalización";
+									}
+									Inicio.listaDocumentos[j].servicio = "HOSP";
+								}
+							}
 						}
 						else if(Inicio.jBServicio.getText().equals("DER") || Inicio.jBServicio.getText().equals("ETM") ){
 							if(Inicio.listaDocumentos[j].nombreNormalizado.equals("Enfermería quirúrgica")){
@@ -127,6 +136,10 @@ public class Utiles {
 	public void actualizaServicio(){
     	Inicio.jBServicio.setText(Inicio.jLServicios.getSelectedValue().toString());
 		Inicio.jBServiciop.setText(Inicio.jLServicios.getSelectedValue().toString());
+		if(Inicio.menuVertical){
+			Inicio.ventanaMicro.jBServiciom.setText(Inicio.jLServicios.getSelectedValue().toString());
+			Inicio.ventanaMicro.jBServiciom.setBackground(new java.awt.Color(153, 255, 153));
+		}
 		Inicio.jLNombresDoc.setModel(Inicio.excel.getDocServicio(Inicio.jBServicio.getText()));
 		
 		Inicio.jBServicio.setBackground(new java.awt.Color(153, 255, 153));
@@ -139,7 +152,9 @@ public class Utiles {
 		if(Inicio.jBNHC.getText().equals("Separador")){
 			Inicio.jBNHC.setBackground(new java.awt.Color(153, 255, 153));
 			Inicio.jBNHCp.setBackground(new java.awt.Color(153, 255, 153));
-			
+			if(Inicio.menuVertical){
+				Inicio.ventanaMicro.jBNHCm.setBackground(new java.awt.Color(153, 255, 153));
+			}
 
 			
 			Inicio.utiles.renombraServicios();
@@ -150,6 +165,9 @@ public class Utiles {
 					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Quirófano";
 					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
 					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					}
 				}
 			}
 			if(Inicio.jBServicio.getText().equals("HOSP")){
@@ -157,6 +175,9 @@ public class Utiles {
 					Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado = "Hospitalización";
 					Inicio.jBNombreDoc.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
 					Inicio.jBNombreDocp.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+					}
 				}
 			}
 		}
@@ -310,6 +331,11 @@ public class Utiles {
 	    	Inicio.modelo.removeAllElements();
 	    	Inicio.jBNHC.setText("");
 	    	Inicio.jBNHCp.setText("");
+			if(Inicio.menuVertical){
+				Inicio.ventanaMicro.jBNHCm.setText("");
+				Inicio.ventanaMicro.jBServiciom.setText("");
+				Inicio.ventanaMicro.jBNombreDocm.setText("");
+			}
 	    	Inicio.jBServicio.setText("");
 	    	Inicio.jBServiciop.setText("");
 	    	Inicio.jBNombreDoc.setText("");
@@ -368,6 +394,16 @@ public class Utiles {
 		Inicio.jBNombreDoc.setText("Apartar");
 		Inicio.jBNombreDocp.setText("Apartar");
 		
+		if(Inicio.menuVertical){
+			Inicio.ventanaMicro.jBNHCm.setText("Apartar");
+			Inicio.ventanaMicro.jBServiciom.setText("Apartar");
+			Inicio.ventanaMicro.jBNombreDocm.setText("Apartar");
+			
+			Inicio.ventanaMicro.jBNHCm.setBackground(Color.gray);
+			Inicio.ventanaMicro.jBServiciom.setBackground(Color.gray);
+			Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.gray);
+		}
+		
 		Inicio.jBNHC.setBackground(Color.gray);
 		Inicio.jBNHCp.setBackground(Color.gray);
 		Inicio.jBServicio.setBackground(Color.gray);
@@ -392,8 +428,9 @@ public class Utiles {
 			String cmd = "taskkill.exe /F /IM FocoAcrobat.exe /T";
 			String cmd2 = "taskkill.exe /F /IM FocoNHC.exe /T";
 			String cmd3 = "taskkill.exe /F /IM FocoAcrobat2.exe /T";
+			String cmd4 = "taskkill.exe /F /IM FocoAcrobatV.exe /T";
 			
-			Process hijo, hijo2, hijo3;
+			Process hijo, hijo2, hijo3, hijo4;
 			try {
 				hijo = Runtime.getRuntime().exec(cmd);
 
@@ -405,6 +442,9 @@ public class Utiles {
 				hijo3 = Runtime.getRuntime().exec(cmd3);
 
 				hijo3.waitFor();
+				
+				hijo4 = Runtime.getRuntime().exec(cmd4);
+				hijo4.waitFor();
 
 				Thread.sleep(300);
 
@@ -437,8 +477,24 @@ public class Utiles {
 		}
 	}
 	
+	public void detectaNHCsecuencial(){
+		if(		Inicio.listaDocumentos[Inicio.numeroPdf].nhc.contains("ERROR") || 
+				Inicio.listaDocumentos[Inicio.numeroPdf].nhc.contains("NO")){
+			if(Inicio.numeroPdf >0 && Inicio.numeroPdf < (Inicio.tamañoCarpetaPdf - 2) ){
+				if((Inicio.listaDocumentos[Inicio.numeroPdf-1].nhc.equals(Inicio.listaDocumentos[Inicio.numeroPdf+1].nhc)) 
+						&& (!Inicio.listaDocumentos[Inicio.numeroPdf-1].nhc.contains("ERROR") || 
+							Inicio.listaDocumentos[Inicio.numeroPdf-1].nhc.contains("NO"))){
+					Inicio.listaDocumentos[Inicio.numeroPdf].nhc = Inicio.listaDocumentos[Inicio.numeroPdf-1].nhc;
+					Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc = true;
+				}
+			}
+		}
+	}
+	
 	public void jBGrabarPagina() {
 		new Acrobat().guardarPagina();
+		
+		detectaNHCsecuencial();
 
 		revisarPropiedadesDocumento();
 
@@ -473,19 +529,31 @@ public class Utiles {
 								.equals("NO")) {
 					Inicio.jBNHC.setBackground(Color.red);
 					Inicio.jBNHCp.setBackground(Color.red);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNHCm.setBackground(Color.red);
+					}
 				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc
 						.equals("Eliminar")
 						|| Inicio.listaDocumentos[Inicio.numeroPdf].nhc
 								.equals("Apartar")) {
 					Inicio.jBNHC.setBackground(Color.GRAY);
 					Inicio.jBNHCp.setBackground(Color.GRAY);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNHCm.setBackground(Color.GRAY);
+					}
 				} else if(Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloNhc){
 					Inicio.jBNHC.setBackground(Color.yellow);
 					Inicio.jBNHCp.setBackground(Color.yellow);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNHCm.setBackground(Color.yellow);
+					}
 				}
 				else{
 					Inicio.jBNHC.setBackground(Color.green);
 					Inicio.jBNHCp.setBackground(Color.green);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNHCm.setBackground(Color.green);
+					}
 				}
 				
 				if (Inicio.listaDocumentos[Inicio.numeroPdf].nhc
@@ -494,6 +562,9 @@ public class Utiles {
 								.equals("X")) {
 					Inicio.jBNHC.setBackground(Color.green);
 					Inicio.jBNHCp.setBackground(Color.green);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNHCm.setBackground(Color.green);
+					}
 				}
 
 				Inicio.jBServicio
@@ -502,15 +573,24 @@ public class Utiles {
 						.equals("X")) {
 					Inicio.jBServicio.setBackground(Color.red);
 					Inicio.jBServiciop.setBackground(Color.red);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBServiciom.setBackground(Color.red);
+					}
 				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].servicio
 						.equals("Eliminar")
 						|| Inicio.listaDocumentos[Inicio.numeroPdf].servicio
 								.equals("Apartar")) {
 					Inicio.jBServicio.setBackground(Color.GRAY);
 					Inicio.jBServiciop.setBackground(Color.GRAY);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBServiciom.setBackground(Color.gray);
+					}
 				} else {
 					Inicio.jBServicio.setBackground(Color.green);
 					Inicio.jBServiciop.setBackground(Color.green);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBServiciom.setBackground(Color.green);
+					}
 				}
 
 				Inicio.jBNombreDoc
@@ -519,15 +599,24 @@ public class Utiles {
 						.equals("X")) {
 					Inicio.jBNombreDoc.setBackground(Color.red);
 					Inicio.jBNombreDocp.setBackground(Color.red);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.red);
+					}
 				} else if (Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado
 						.equals("Eliminar")
 						|| Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado
 								.equals("Apartar")) {
 					Inicio.jBNombreDoc.setBackground(Color.GRAY);
 					Inicio.jBNombreDocp.setBackground(Color.GRAY);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.gray);
+					}
 				} else {
 					Inicio.jBNombreDoc.setBackground(Color.green);
 					Inicio.jBNombreDocp.setBackground(Color.green);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBNombreDocm.setBackground(Color.green);
+					}
 				}
 
 				Inicio.jBNHCp
@@ -537,9 +626,18 @@ public class Utiles {
 				Inicio.jBNombreDocp
 						.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
 
+				if(Inicio.menuVertical){
+					Inicio.ventanaMicro.jBNHCm.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nhc);
+					Inicio.ventanaMicro.jBServiciom.setText(Inicio.listaDocumentos[Inicio.numeroPdf].servicio);
+					Inicio.ventanaMicro.jBNombreDocm.setText(Inicio.listaDocumentos[Inicio.numeroPdf].nombreNormalizado);
+				}
+				
 				if (Inicio.listaDocumentos[Inicio.numeroPdf].semaforoAmarilloServicio == true) {
 					Inicio.jBServicio.setBackground(Color.yellow);
 					Inicio.jBServiciop.setBackground(Color.yellow);
+					if(Inicio.menuVertical){
+						Inicio.ventanaMicro.jBServiciom.setBackground(Color.gray);
+					}
 				}
 
 				//   Actualiza al servicio del documento

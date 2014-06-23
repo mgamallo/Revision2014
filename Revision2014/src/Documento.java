@@ -51,6 +51,7 @@ public class Documento {
 	}
 
 	
+	
 	boolean reDetectorNHCUrgencias(){
 		if(nhc.contains("ERROR") || nhc.contains("NO")){
 			if(nombreNormalizado.equals("Informe urgencias") || nombreNormalizado.equals("Enfermería urgencias") ){
@@ -477,12 +478,31 @@ public class Documento {
 		if(this.nombreNormalizado.equals("X") && !this.servicio.equals("Separador")){
 			if((this.fisica.dimensiones.alto <= 330 && this.fisica.dimensiones.alto >= 290) || 
 					this.fisica.dimensiones.ancho <= 330 && this.fisica.dimensiones.ancho >= 290){
-				this.nombreNormalizado = "Eco";
+				this.nombreNormalizado = Inicio.ECO;
 				}
 		}
 	}
 	
+	void detectaMonitor(){
+		if(this.nombreNormalizado.equals("X") && !this.servicio.equals("Separador")){
+			if((this.fisica.dimensiones.alto <= 426 && this.fisica.dimensiones.alto >= 420) || 
+					this.fisica.dimensiones.ancho <= 426 && this.fisica.dimensiones.ancho >= 420){
+				this.nombreNormalizado = Inicio.MONITORIZACION;
+			}
+		}
+	}
 	
+	void detectaDocRosa(){
+		if(this.nombreNormalizado.equals("X") && !this.servicio.equals("Separador")){
+			if((this.fisica.dimensiones.alto <= 455  && this.fisica.dimensiones.alto >= 451) || 
+					this.fisica.dimensiones.ancho <= 455 && this.fisica.dimensiones.ancho >= 451){
+				if(this.cadenaOCR.contains("Tratamiento") || this.cadenaOCR.contains("Diagnóstico")){
+					this.nombreNormalizado = Inicio.DOC;
+				}
+				
+			}
+		}
+	}
 	
 }
 

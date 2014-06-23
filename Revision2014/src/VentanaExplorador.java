@@ -1208,7 +1208,28 @@ public class VentanaExplorador extends javax.swing.JFrame {
 			for(int i=0;i<aux;i++){
 				Inicio.listaDocumentos[i].detectaEcos();
 				Inicio.listaDocumentos[i].detectaEKGs();
+				Inicio.listaDocumentos[i].detectaMonitor();
+				Inicio.listaDocumentos[i].detectaDocRosa();
 			}
+			
+			// Reconocimiento secuencial de nhc
+			
+			/*
+			for(int i=0;i<aux;i++){
+				if(		Inicio.listaDocumentos[i].nhc.contains("ERROR") || 
+						Inicio.listaDocumentos[i].nhc.contains("NO")){
+					if(i>0 && i< (aux -1) ){
+						if((Inicio.listaDocumentos[i-1].nhc.equals(Inicio.listaDocumentos[i+1].nhc)) 
+								&& (!Inicio.listaDocumentos[i-1].nhc.contains("ERROR") || 
+									Inicio.listaDocumentos[i-1].nhc.contains("NO"))){
+							Inicio.listaDocumentos[i].nhc = Inicio.listaDocumentos[i-1].nhc;
+							Inicio.listaDocumentos[i].semaforoAmarilloNhc = true;
+						}
+					}
+				}
+			}
+			
+			*/
 			
 			Inicio.separadores = new ArrayList<Integer>();
 			Inicio.separadores = new Separadores().getNumOrdenSeparadores();
@@ -1225,7 +1246,7 @@ public class VentanaExplorador extends javax.swing.JFrame {
 				for(int j=i;j<Inicio.separadores.get(numSeparador);j++){
 					
 					//Comprobamos si el servicio es anestesia para hacer el cambio anrc - carc
-					if(servicioPosible.equals("ANR")){
+					if(servicioPosible.equals("ANR") || servicioPosible.equals("NRL")){
 						if(Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.EKG)){
 							Inicio.listaDocumentos[j].servicio = "CAR";
 						}
@@ -1344,8 +1365,8 @@ public class VentanaExplorador extends javax.swing.JFrame {
         	        Inicio.ventanaIntegral = new VentanaIntegral();
         	        Inicio.ventanaIntegral.setBounds(Inicio.coordenadas.coordenadas[4].x, Inicio.coordenadas.coordenadas[4].y, 360,1150);
         	        
-        	        // Inicio.ventanaMicro = new VentanaMicro();
-        	        //Inicio.ventanaMicro.setBounds(Inicio.coordenadas.coordenadas[5].x, Inicio.coordenadas.coordenadas[5].y, 750, 180);
+        	        Inicio.ventanaMicro = new VentanaMicro();
+        	        Inicio.ventanaMicro.setBounds(Inicio.coordenadas.coordenadas[5].x, Inicio.coordenadas.coordenadas[5].y, 680, 90);
         	        
         	        // Inicio.ventanaNombres = new VentanaNombres();
         	        // Inicio.ventanaNombresYServicios = new VentanaNombresYServicios();

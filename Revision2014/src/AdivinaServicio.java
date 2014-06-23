@@ -40,13 +40,20 @@ public class AdivinaServicio {
 		
 		if(maximoServicio.equals("")){
 			int numEkgs = 0;
+			int numCursoClinico = 0;
 			for(int j= inicio; j < fin; j++){
 				if(Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.EKG)){
 					numEkgs++;
 				}
+				else if(Inicio.listaDocumentos[j].nombreNormalizado.equals(Inicio.CURSOCLINICO)){
+					numCursoClinico++;
+				}
 			}
-			if(numEkgs > 3){
+			if(numEkgs > 3 && numCursoClinico <3){
 				maximoServicio = "CAR";
+			}
+			else if(numEkgs > 3 && numCursoClinico >= 3){
+				maximoServicio = "NRL";
 			}
 		}
 		

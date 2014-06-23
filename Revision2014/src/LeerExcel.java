@@ -160,14 +160,14 @@ public class LeerExcel {
                 }
             } 
             
-            /*
+            
             for(int i=0;i<numFilasUs-1;i++){
-            	for(int j=0;j<numColumUs-1;j++){
+            	for(int j=0;j<numColumUs;j++){
             		System.out.print(tablaCoordenadas[i][j] + "   ");
             	}
             	System.out.println();
             }
-            */
+            
             
 //        	Leer hoja excel usuariosUrgencias
             hoja=archivoExcel.getSheet(14);
@@ -427,8 +427,11 @@ public class LeerExcel {
 	    			 }else{
 	    				 indice = 23;
 	    			 }
+	    			 System.out.println("Indice es " + indice);
 	    			 for(int j=0;j<2;j++){
+	    				 System.out.println(Integer.parseInt(tablaCoordenadas[i][indice].toString()));
 	    				 parejaCoordenadas[4 + j].x = Integer.parseInt(tablaCoordenadas[i][indice].toString());indice++;
+	    				 System.out.println(Integer.parseInt(tablaCoordenadas[i][indice].toString()));
 	    				 parejaCoordenadas[4 + j].y = Integer.parseInt(tablaCoordenadas[i][indice].toString());indice++;
 	    			 }
 	    			 

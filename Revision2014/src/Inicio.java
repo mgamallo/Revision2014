@@ -39,6 +39,13 @@ public class Inicio extends JFrame {
 	
 	static final String CONSENTIMIENTO = "Consentimento informado";
 	static final String EKG = "ECG";
+	static final String ECO = "Eco";
+	static final String MONITORIZACION = "Cardiotocografía basal";
+	static final String DOC = "Doc";
+	static final String CURSOCLINICO = "Curso clínico";
+	static final String CRIBADO = "Cribado prenatal";
+	static final String HOSPITALIZACION = "Hospitalización";
+	static final String CIA = "CIA";
 	
 	
 	static boolean documentacionDeUrgencias = false;

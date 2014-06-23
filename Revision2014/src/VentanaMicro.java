@@ -8,6 +8,14 @@ public class VentanaMicro extends javax.swing.JFrame {
      */
     public VentanaMicro() {
         initComponents();
+        
+        setMaximumSize(new java.awt.Dimension(700, 60));
+        setPreferredSize(new java.awt.Dimension(700, 60));
+         
+        setVisible(true);
+        setAlwaysOnTop(true);
+        
+        
     }
 
     /**
@@ -24,53 +32,64 @@ public class VentanaMicro extends javax.swing.JFrame {
         jBServiciom = new javax.swing.JButton();
         jBNombreDocm = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(750, 130));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(750, 100));
+        jPanel1.setMaximumSize(new java.awt.Dimension(700, 60));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 60));
 
-        jBNHCm.setText("jButton1");
-        jBNHCm.setMaximumSize(new java.awt.Dimension(150, 75));
-        jBNHCm.setMinimumSize(new java.awt.Dimension(150, 75));
-        jBNHCm.setPreferredSize(new java.awt.Dimension(150, 75));
+        jBNHCm.setText("2.123.456");
+        jBNHCm.setMaximumSize(new java.awt.Dimension(180, 60));
+        jBNHCm.setMinimumSize(new java.awt.Dimension(180, 60));
+        jBNHCm.setPreferredSize(new java.awt.Dimension(180, 60));
+        jBNHCm.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
 
-        jBServiciom.setText("jButton2");
-        jBServiciom.setPreferredSize(new java.awt.Dimension(145, 75));
+        jBServiciom.setText("CAR");
+        jBServiciom.setPreferredSize(new java.awt.Dimension(70, 60));
+        jBServiciom.setMaximumSize(new java.awt.Dimension(70, 60));
+        jBServiciom.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        jBServiciom.setBackground(new java.awt.Color(233, 0, 0));
 
         jBNombreDocm.setText("jButton3");
-        jBNombreDocm.setPreferredSize(new java.awt.Dimension(370, 75));
+        jBNombreDocm.setPreferredSize(new java.awt.Dimension(360, 60));
+        jBNombreDocm.setMinimumSize(new java.awt.Dimension(360, 60));
+        jBNombreDocm.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jBNHCm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBServiciom, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBNHCm)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBServiciom)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBNombreDocm, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jBNHCm, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-            .addComponent(jBServiciom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jBNombreDocm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+            .addComponent(jBNHCm)
+            .addComponent(jBServiciom)
+            .addComponent(jBNombreDocm)
         );
 
+        /*
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1)
         );
+        */
+        
+        getContentPane().add(jPanel1);
 
         pack();
-        setVisible(true);
+
     }// </editor-fold>                        
 
     /**
@@ -109,9 +128,9 @@ public class VentanaMicro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jBNHCm;
-    private javax.swing.JButton jBNombreDocm;
-    private javax.swing.JButton jBServiciom;
+    public javax.swing.JButton jBNHCm;
+    public javax.swing.JButton jBNombreDocm;
+    public javax.swing.JButton jBServiciom;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration                   
 }

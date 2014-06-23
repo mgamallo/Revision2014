@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -50,7 +51,12 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(400, 120));
         setResizable(false);
         // setLocationRelativeTo(botonOrigen);
-        setLocation(1000, 10);
+        // setLocation(1000, 10);
+        setLocationRelativeTo(Inicio.jBNHCp);
+        if(Inicio.menuVertical){
+        	Rectangle rectangulo = Inicio.ventanaMicro.getBounds();
+        	setLocation(rectangulo.x,rectangulo.y);
+        }
         setAlwaysOnTop(true);
 
         jLNumero.setText("Introduce el NHC");
@@ -342,6 +348,10 @@ public class InterfazIntroducirNHC extends javax.swing.JDialog {
 				Inicio.jBNHCp.setText(numeroFormateado);
 				Inicio.jBNHC.setBackground(new java.awt.Color(153,255,153));
 				Inicio.jBNHCp.setBackground(new java.awt.Color(153,255,153));
+				if(Inicio.menuVertical){
+					Inicio.ventanaMicro.jBNHCm.setText(numeroFormateado);
+					Inicio.ventanaMicro.jBNHCm.setBackground(new java.awt.Color(153,255,153));
+				}
 
 			}
 		}
